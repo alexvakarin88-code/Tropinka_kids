@@ -7,6 +7,53 @@
   <meta name="description" content="Тропинка — сказки, квесты и праздники для детей.">
   <title>Тропинка — сказки, квесты и праздники для детей</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<style id="tropinka-brand-refresh">
+:root { color-scheme: light; }
+body { background:#f7f5e9 !important; }
+#vt {
+  --ink:#244b37 !important; --ink-soft:#617765 !important;
+  --moon:#e8c978 !important; --moon-deep:#c69d43 !important;
+  --mist:#edf2e6 !important; --line:#d8e2d0 !important; --ok:#477b50 !important;
+  color:#244b37 !important; max-width:1120px !important;
+  font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif !important;
+}
+#vt h1,#vt h2,#vt h3 { color:#244b37 !important; }
+#vt .vt-hero {
+  background-color:#244b37 !important; color:#fff !important;
+  background-image:linear-gradient(90deg,rgba(22,58,39,.82),rgba(22,58,39,.18)),
+    url("images/tropinka-hero.jpg") !important;
+  background-size:cover !important; background-position:center 43% !important;
+  border:1px solid #d8e2d0 !important; border-radius:28px !important;
+  min-height:360px; display:flex; flex-direction:column; justify-content:center;
+}
+#vt .vt-hero h1 { color:#fff !important; text-shadow:0 2px 12px rgba(0,0,0,.25); max-width:14em; }
+#vt .vt-hero p.vt-sub { color:#fff !important; text-shadow:0 1px 8px rgba(0,0,0,.35); }
+#vt .vt-kicker { color:#f5df9c !important; }
+#vt .vt-pill { background:rgba(255,255,255,.17) !important; border-color:rgba(255,255,255,.45) !important; color:#fff !important; }
+#vt .vt-btn { background:#e8c978 !important; color:#244b37 !important; border-color:#c69d43 !important; }
+#vt .vt-btn:hover { background:#f3dda0 !important; }
+#vt .vt-btn-ghost { background:#fff !important; color:#244b37 !important; border-color:#d8e2d0 !important; }
+#vt .vt-steps li,#vt .vt-review,#vt .vt-foot { background:#edf2e6 !important; }
+#vt .vt-steps li::before { background:#477b50 !important; }
+#vt .vt-card { border:1px solid #d8e2d0 !important; border-radius:22px !important; padding:14px !important; box-shadow:0 8px 24px rgba(36,75,55,.07); overflow:hidden; }
+#vt .vt-card-top { margin-bottom:12px; }
+#vt .vt-card-art { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border-radius:15px; margin-bottom:16px; }
+#vt .vt-ico { background:#edf2e6 !important; }
+#vt .vt-ico svg { stroke:#477b50 !important; }
+#vt .vt-status.is-open { background:#e8c978 !important; border-color:#c69d43 !important; color:#244b37 !important; }
+#vt .vt-card li::before { color:#477b50 !important; }
+#vt .vt-badge { color:#477b50 !important; }
+#vt details { border:1px solid #d8e2d0 !important; border-radius:16px !important; }
+#vt summary::after { color:#477b50 !important; }
+#vt .vt-foot { border:1px solid #d8e2d0; }
+@media(max-width:600px) {
+  #vt { padding:10px !important; }
+  #vt .vt-hero { min-height:390px; background-position:58% center !important; }
+  #vt .vt-card { padding:12px !important; }
+}
+</style>
+
 </head>
 <body>
 <!--
@@ -132,6 +179,7 @@
   <div class="vt-cards">
 
     <article class="vt-card" data-card="tale">
+      <img class="vt-card-art" src="images/tale.jpg" alt="Персональная сказка для ребёнка">
       <div class="vt-card-top">
         <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h13a1 1 0 0 1 1 1v14H6.5A1.5 1.5 0 0 0 5 20.5z"/><path d="M5 20.5V4"/><path d="M12 8.2l.9 1.9 2.1.3-1.5 1.5.4 2.1-1.9-1-1.9 1 .4-2.1L9 10.4l2.1-.3z"/></svg></span>
         <span class="vt-status" data-status>Скоро</span>
@@ -148,6 +196,7 @@
     </article>
 
     <article class="vt-card" data-card="birthday">
+      <img class="vt-card-art" src="images/birthday.jpg" alt="Сценарий детского дня рождения">
       <div class="vt-card-top">
         <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.6"/><path d="M12 10v10M4 14h16"/><path d="M12 10C10 5.5 6.5 6.5 7.6 9c.7 1.4 3.2 1.2 4.4 1zm0 0c2-4.5 5.5-3.5 4.4-1-.7 1.4-3.2 1.2-4.4 1z"/></svg></span>
         <span class="vt-status" data-status>Скоро</span>
@@ -164,6 +213,7 @@
     </article>
 
     <article class="vt-card" data-card="quest">
+      <img class="vt-card-art" src="images/quest.jpg" alt="Детский квест и приключение">
       <div class="vt-card-top">
         <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span>
         <span class="vt-status" data-status>Скоро</span>
@@ -180,6 +230,7 @@
     </article>
 
     <article class="vt-card" data-card="weekend">
+      <img class="vt-card-art" src="images/weekend.jpg" alt="Семейные выходные без гаджетов">
       <div class="vt-card-top">
         <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></span>
         <span class="vt-status" data-status>Скоро</span>
