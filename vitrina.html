@@ -1,0 +1,332 @@
+<!--
+  ===== Витрина: 4 карточки (сказка, день рождения, квест, выходные без экрана) =====
+  Как вставить: скопируйте ВЕСЬ блок (от <section id="vt"> до </section>) в нужное место страницы.
+  Стили и скрипт внутри, внешние библиотеки не нужны.
+  Название, ссылки на анкеты, контакты и текст пилота меняются в блоке CONFIG внизу, в самом скрипте.
+  Тексты карточек и частых вопросов можно править прямо в HTML.
+-->
+<section id="vt" aria-label="Витрина">
+<style>
+#vt{
+  --ink:#26305E; --ink-soft:#4B5686; --moon:#FFC94A; --moon-deep:#E69F00;
+  --mist:#EEF1FF; --line:#C5CEEE; --ok:#1F8A62;
+  font-family:"Nunito","Trebuchet MS","Segoe UI",system-ui,-apple-system,sans-serif;
+  color:var(--ink); line-height:1.55; max-width:1040px; margin:0 auto; padding:16px;
+  box-sizing:border-box; text-align:left;
+}
+#vt *,#vt *::before,#vt *::after{box-sizing:border-box}
+#vt h1,#vt h2,#vt h3{font-family:Georgia,"Times New Roman",serif;color:var(--ink);margin:0}
+#vt a:focus-visible,#vt button:focus-visible,#vt summary:focus-visible{outline:3px solid var(--moon-deep);outline-offset:3px}
+
+/* Шапка: ночное небо, звёзды и месяц */
+#vt .vt-hero{position:relative;overflow:hidden;background:var(--ink);color:#fff;border-radius:26px;padding:clamp(28px,6vw,60px);
+  background-image:
+    radial-gradient(circle at 8% 22%,rgba(255,201,74,.95) 0 2px,transparent 3px),
+    radial-gradient(circle at 22% 78%,rgba(255,255,255,.8) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 44% 12%,rgba(255,255,255,.7) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 63% 86%,rgba(255,201,74,.85) 0 2px,transparent 3px),
+    radial-gradient(circle at 78% 40%,rgba(255,255,255,.75) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 92% 70%,rgba(255,201,74,.9) 0 2px,transparent 3px);}
+#vt .vt-hero::after{content:"";position:absolute;right:7%;top:12%;width:108px;height:108px;border-radius:50%;
+  box-shadow:inset -26px 6px 0 0 var(--moon);opacity:.95;pointer-events:none}
+#vt .vt-kicker{margin:0 0 12px;font-weight:800;color:var(--moon);font-size:17px}
+#vt .vt-hero h1{color:#fff;font-size:clamp(28px,6vw,46px);line-height:1.15;max-width:15em;position:relative;z-index:1}
+#vt .vt-hero p.vt-sub{margin:16px 0 0;font-size:clamp(16px,2.4vw,19px);color:#DCE1FF;max-width:36em;position:relative;z-index:1}
+#vt .vt-pill{display:inline-block;margin:22px 0 0;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);font-size:15px;position:relative;z-index:1}
+#vt .vt-hero-cta{margin-top:22px;position:relative;z-index:1}
+@media (max-width:600px){#vt .vt-hero::after{width:64px;height:64px;box-shadow:inset -15px 4px 0 0 var(--moon);top:20px;right:20px}}
+
+#vt .vt-btn{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:12px 26px;border-radius:999px;border:2px solid var(--ink);background:var(--moon);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+#vt .vt-btn:hover{background:#FFD978}
+#vt .vt-hero .vt-btn{border-color:var(--moon)}
+#vt .vt-btn-ghost{background:#fff}
+#vt .vt-btn-ghost:hover{background:var(--mist)}
+
+#vt section.vt-block{margin:clamp(36px,6vw,64px) 0 0}
+#vt .vt-block h2{font-size:clamp(24px,4.5vw,34px);line-height:1.2;margin-bottom:8px}
+#vt .vt-lead{margin:0 0 24px;color:var(--ink-soft);font-size:17px;max-width:42em}
+
+/* Как это работает */
+#vt .vt-steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:vt}
+@media (min-width:760px){#vt .vt-steps{grid-template-columns:repeat(3,1fr)}}
+#vt .vt-steps li{counter-increment:vt;background:var(--mist);border-radius:18px;padding:20px 20px 20px 20px}
+#vt .vt-steps li::before{content:counter(vt);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;margin-bottom:10px}
+#vt .vt-steps h3{font-size:19px;margin-bottom:4px}
+#vt .vt-steps p{margin:0;color:var(--ink-soft);font-size:15px}
+
+/* Карточки */
+#vt .vt-cards{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:760px){#vt .vt-cards{grid-template-columns:1fr 1fr}}
+#vt .vt-card{display:flex;flex-direction:column;background:#fff;border:2px solid var(--line);border-radius:22px;padding:22px}
+#vt .vt-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+#vt .vt-ico{width:54px;height:54px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center}
+#vt .vt-ico svg{width:28px;height:28px;fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#vt .vt-status{font-size:14px;font-weight:800;padding:5px 12px;border-radius:999px;border:2px solid var(--line);color:var(--ink-soft);background:#fff}
+#vt .vt-status.is-open{background:var(--moon);border-color:var(--moon-deep);color:var(--ink)}
+#vt .vt-card h3{font-size:22px;line-height:1.25;margin-bottom:6px}
+#vt .vt-card p.vt-desc{margin:0 0 12px;color:var(--ink-soft)}
+#vt .vt-card ul{list-style:none;margin:0 0 14px;padding:0}
+#vt .vt-card li{position:relative;padding-left:26px;margin:0 0 7px;font-size:15.5px}
+#vt .vt-card li::before{content:"✓";position:absolute;left:0;top:0;font-weight:800;color:var(--ok)}
+#vt .vt-meta{margin:auto 0 14px;font-size:14px;color:var(--ink-soft)}
+#vt .vt-badge{display:inline-block;font-weight:800;color:var(--ok);margin-right:8px}
+#vt .vt-card .vt-btn{width:100%}
+#vt .vt-cta .vt-btn + .vt-btn{margin-top:10px}
+
+/* Отзывы (показываются, когда в CONFIG.reviews есть записи) */
+#vt .vt-reviews{display:grid;gap:14px}
+@media (min-width:760px){#vt .vt-reviews{grid-template-columns:repeat(3,1fr)}}
+#vt .vt-review{margin:0;background:var(--mist);border-radius:18px;padding:18px}
+#vt .vt-review p{margin:0 0 8px}
+#vt .vt-review cite{font-style:normal;font-weight:800;font-size:14px;color:var(--ink-soft)}
+
+/* Вопросы */
+#vt details{background:#fff;border:2px solid var(--line);border-radius:16px;padding:0;margin:0 0 10px}
+#vt summary{cursor:pointer;font-weight:800;padding:14px 18px;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+#vt summary::-webkit-details-marker{display:none}
+#vt summary::after{content:"+";font-size:22px;line-height:1;color:var(--ink-soft)}
+#vt details[open] summary::after{content:"−"}
+#vt details p{margin:0;padding:0 18px 16px;color:var(--ink-soft)}
+#vt details a{color:var(--ink);font-weight:700}
+
+#vt .vt-foot{margin:clamp(36px,6vw,64px) 0 0;padding:22px;border-radius:22px;background:var(--mist);text-align:center}
+#vt .vt-foot h2{font-size:24px;margin-bottom:8px}
+#vt .vt-foot p{margin:0 0 6px;color:var(--ink-soft);font-size:15px}
+#vt .vt-contacts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:14px 0 0}
+@media (prefers-reduced-motion:reduce){#vt *{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="vt-hero">
+  <p class="vt-kicker"><span data-brand>Тропинка</span> — <span data-tagline>сказки, квесты и праздники для детей</span></p>
+  <h1>Сказки, квесты и праздники, которые подходят именно вашему ребёнку</h1>
+  <p class="vt-sub">Расскажите о ребёнке в короткой анкете, и мы соберём готовый комплект. Без поисков, сочинения сценариев и вечеров над заготовками.</p>
+  <span class="vt-pill" id="vt-pilot">Запуск: первые заказы бесплатно, мест ограничено. Взамен просим короткий отзыв.</span>
+  <div class="vt-hero-cta"><a class="vt-btn" href="#vt-cards">Выбрать подарок для ребёнка</a></div>
+</header>
+
+<section class="vt-block" aria-labelledby="vt-how">
+  <h2 id="vt-how">Как это работает</h2>
+  <p class="vt-lead">Три простых шага, и вам не нужно ничего придумывать самим.</p>
+  <ol class="vt-steps">
+    <li><h3>Расскажите о ребёнке</h3><p>Заполните анкету: имя, любимое, друзья, мечты. Это занимает около 15 минут.</p></li>
+    <li><h3>Мы готовим комплект</h3><p>Готовим с помощью нейросети и перед отправкой проверяем вручную.</p></li>
+    <li><h3>Вы получаете готовый файл</h3><p>Читайте с экрана или распечатайте. Срок согласуем после анкеты.</p></li>
+  </ol>
+</section>
+
+<section class="vt-block" id="vt-cards" aria-labelledby="vt-choose">
+  <h2 id="vt-choose">Выберите, что подарить ребёнку</h2>
+  <p class="vt-lead">У каждого комплекта своя короткая анкета, чтобы результат был про вашего ребёнка, а не «для всех».</p>
+
+  <div class="vt-cards">
+
+    <article class="vt-card" data-card="tale">
+      <div class="vt-card-top">
+        <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h13a1 1 0 0 1 1 1v14H6.5A1.5 1.5 0 0 0 5 20.5z"/><path d="M5 20.5V4"/><path d="M12 8.2l.9 1.9 2.1.3-1.5 1.5.4 2.1-1.9-1-1.9 1 .4-2.1L9 10.4l2.1-.3z"/></svg></span>
+        <span class="vt-status" data-status>Скоро</span>
+      </div>
+      <h3>Персональная сказка про ребёнка</h3>
+      <p class="vt-desc">Сказка, где главный герой ваш ребёнок, а рядом его друзья, питомцы и родные.</p>
+      <ul>
+        <li>Герой с именем, характером и мечтой вашего ребёнка</li>
+        <li>Тема на выбор: страх темноты, садик, новый братик или просто сказка на ночь</li>
+        <li>Готовый файл: читать с экрана или распечатать</li>
+      </ul>
+      <p class="vt-meta"><span class="vt-badge" data-badge>Пилот: бесплатно</span>Анкета около 15 минут</p>
+      <div class="vt-cta"></div>
+    </article>
+
+    <article class="vt-card" data-card="birthday">
+      <div class="vt-card-top">
+        <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1.6"/><path d="M12 10v10M4 14h16"/><path d="M12 10C10 5.5 6.5 6.5 7.6 9c.7 1.4 3.2 1.2 4.4 1zm0 0c2-4.5 5.5-3.5 4.4-1-.7 1.4-3.2 1.2-4.4 1z"/></svg></span>
+        <span class="vt-status" data-status>Скоро</span>
+      </div>
+      <h3>День рождения под ключ</h3>
+      <p class="vt-desc">Всё для праздника в одном комплекте, чтобы не собирать идеи по чатам и сайтам.</p>
+      <ul>
+        <li>Приглашения и сценарий праздника по часам</li>
+        <li>Меню, список покупок и чек-лист подготовки на две недели</li>
+        <li>Квест как главное событие для гостей</li>
+      </ul>
+      <p class="vt-meta"><span class="vt-badge" data-badge>Пилот: бесплатно</span>Анкета около 15 минут</p>
+      <div class="vt-cta"></div>
+    </article>
+
+    <article class="vt-card" data-card="quest">
+      <div class="vt-card-top">
+        <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span>
+        <span class="vt-status" data-status>Скоро</span>
+      </div>
+      <h3>Квест для вашего двора или посёлка</h3>
+      <p class="vt-desc">Игра-приключение на вашей территории: двор, дача, посёлок, пляж. Дети проходят задания по карточкам.</p>
+      <ul>
+        <li>Задания под ваше место и возраст детей</li>
+        <li>Карточки для печати и список реквизита</li>
+        <li>Взрослому почти не нужно участвовать</li>
+      </ul>
+      <p class="vt-meta"><span class="vt-badge" data-badge>Пилот: бесплатно</span>Анкета около 15 минут</p>
+      <div class="vt-cta"></div>
+    </article>
+
+    <article class="vt-card" data-card="weekend">
+      <div class="vt-card-top">
+        <span class="vt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></span>
+        <span class="vt-status" data-status>Скоро</span>
+      </div>
+      <h3>Выходные без экрана</h3>
+      <p class="vt-desc">Каждую неделю готовые занятия, чем увлечь ребёнка без гаджетов.</p>
+      <ul>
+        <li>3–5 занятий по возрасту ребёнка</li>
+        <li>Минимум реквизита, подходит и для дождливых дней</li>
+        <li>Материалы для печати: бери и играй</li>
+      </ul>
+      <p class="vt-meta"><span class="vt-badge" data-badge>Пилот: бесплатно</span>Анкета 3–5 минут</p>
+      <div class="vt-cta"></div>
+    </article>
+
+  </div>
+</section>
+
+<section class="vt-block" id="vt-reviews-wrap" aria-labelledby="vt-rev" hidden>
+  <h2 id="vt-rev">Что говорят родители</h2>
+  <div class="vt-reviews" id="vt-reviews"></div>
+</section>
+
+<section class="vt-block" aria-labelledby="vt-faq">
+  <h2 id="vt-faq">Частые вопросы</h2>
+  <details>
+    <summary>Почему сейчас бесплатно?</summary>
+    <p>Мы только запускаемся и хотим сделать комплекты по-настоящему полезными. Первым семьям мы дарим заказы, а взамен просим короткий отзыв и, если вы согласитесь, разрешение показать результат без фото и имени ребёнка. Позже появятся платные тарифы, и мы сообщим об этом заранее.</p>
+  </details>
+  <details>
+    <summary>Кто составляет комплект?</summary>
+    <p>Мы готовим его с помощью нейросети и перед отправкой проверяем вручную. Всё остаётся про вашего ребёнка, а не набор шаблонных фраз.</p>
+  </details>
+  <details>
+    <summary>Что будет с данными и фото ребёнка?</summary>
+    <p>Анкета и фото нужны только для вашего заказа. Подробности в <a href="#" id="vt-privacy" target="_blank" rel="noopener">политике конфиденциальности</a>.</p>
+  </details>
+  <details>
+    <summary>Сколько ждать готовый комплект?</summary>
+    <p>Срок зависит от очереди пилота. После анкеты мы напишем, когда комплект будет готов.</p>
+  </details>
+  <details>
+    <summary>Для какого возраста это подходит?</summary>
+    <p>Мы ориентируемся на детей примерно от 3 до 10 лет. Если ваш ребёнок старше или младше, напишите нам, и мы подскажем.</p>
+  </details>
+</section>
+
+<section class="vt-foot" aria-labelledby="vt-contact">
+  <h2 id="vt-contact">Остались вопросы?</h2>
+  <p>Напишите нам, и мы поможем выбрать комплект.</p>
+  <div class="vt-contacts" id="vt-contacts"></div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===== НАСТРОЙКИ: меняйте только здесь ===== */
+  var CONFIG = {
+    brand: "Тропинка",   // название платформы (подставится во все места)
+    tagline: "сказки, квесты и праздники для детей",   // пояснительный подзаголовок рядом с названием
+    pilotText: "Запуск: первые заказы бесплатно, мест ограничено. Взамен просим короткий отзыв.",
+    // Пишите реальное число мест, только если оно правда ограничено. Выдуманный дефицит отпугивает родителей.
+    freeBadge: "Пилот: бесплатно",
+    privacyUrl: "#",           // ссылка на политику конфиденциальности
+
+    // Ссылка на анкету каждой карточки. Пусто = карточка «Скоро» с кнопкой «Сообщить, когда откроется».
+    cards: {
+      // sample: ссылка на образец (пусто = кнопки «Посмотреть образец» нет)
+      tale:     { url: "skazka-anketa.html", sample: "obrazec-skazki.html" },
+      birthday: { url: "den-rozhdeniya-anketa.html", sample: "obrazec-dnya-rozhdeniya.html" },
+      quest:    { url: "https://alexvakarin88-code.github.io/questin/", sample: "https://alexvakarin88-code.github.io/questin/#quest", badge: "От 490 ₽" },
+      weekend:  { url: "vyhodnye-anketa.html", sample: "obrazec-vyhodnyh.html" }
+    },
+
+    // Контакты (пустые не показываются). Telegram оставлен запасным: в России он работает с ограничениями.
+    email: "al-vakarin@yandex.ru",
+    max: "https://max.ru/join/3kWVRG_Eb1b443Pf8UUkGIJOP78rEGDZ-yPQugYHejs",   // приглашение в канал Тропинка в Max
+    vk: "",        // например, "https://vk.com/..."
+    telegram: "Alex_delo",
+
+    // Отзывы появятся на странице, когда вы добавите сюда записи, например:
+    // { text: "Сын попросил читать эту сказку каждый вечер.", who: "Мама Максима, 6 лет" }
+    // Добавляйте только настоящие отзывы и только с разрешения автора.
+    reviews: []
+  };
+  /* ========================================== */
+
+  var root = document.getElementById("vt");
+
+  [].slice.call(root.querySelectorAll("[data-brand]")).forEach(function (el) { el.textContent = CONFIG.brand; });
+  [].slice.call(root.querySelectorAll("[data-tagline]")).forEach(function (el) { el.textContent = CONFIG.tagline; });
+  root.querySelector("#vt-pilot").textContent = CONFIG.pilotText;
+  [].slice.call(root.querySelectorAll("[data-badge]")).forEach(function (el) { el.textContent = CONFIG.freeBadge; });
+  root.querySelector("#vt-privacy").setAttribute("href", CONFIG.privacyUrl);
+
+  /* Карточки: открыта (есть ссылка) или скоро */
+  [].slice.call(root.querySelectorAll("[data-card]")).forEach(function (card) {
+    var key = card.getAttribute("data-card");
+    var url = CONFIG.cards[key] && CONFIG.cards[key].url;
+    var status = card.querySelector("[data-status]");
+    var cta = card.querySelector(".vt-cta");
+    var badge = CONFIG.cards[key] && CONFIG.cards[key].badge;
+    if (badge) { card.querySelector("[data-badge]").textContent = badge; }
+    var a = document.createElement("a");
+    a.className = "vt-btn";
+    if (url) {
+      status.textContent = "Открыто";
+      status.className = "vt-status is-open";
+      a.href = url;
+      a.textContent = "Заполнить анкету";
+    } else {
+      var title = card.querySelector("h3").textContent;
+      a.className = "vt-btn vt-btn-ghost";
+      a.href = "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent("Сообщите, когда откроется: " + title);
+      a.textContent = "Сообщить, когда откроется";
+    }
+    cta.appendChild(a);
+    var sample = CONFIG.cards[key] && CONFIG.cards[key].sample;
+    if (sample) {
+      var s = document.createElement("a");
+      s.className = "vt-btn vt-btn-ghost";
+      s.href = sample;
+      s.textContent = "Посмотреть образец";
+      cta.appendChild(s);
+    }
+  });
+
+  /* Отзывы */
+  if (CONFIG.reviews.length) {
+    var list = root.querySelector("#vt-reviews");
+    CONFIG.reviews.forEach(function (r) {
+      var f = document.createElement("figure");
+      f.className = "vt-review";
+      var p = document.createElement("p");
+      p.textContent = r.text;
+      var c = document.createElement("cite");
+      c.textContent = r.who || "";
+      f.appendChild(p); f.appendChild(c);
+      list.appendChild(f);
+    });
+    root.querySelector("#vt-reviews-wrap").hidden = false;
+  }
+
+  /* Контакты */
+  var box = root.querySelector("#vt-contacts");
+  function addContact(label, href, primary) {
+    var a = document.createElement("a");
+    a.className = "vt-btn" + (primary ? "" : " vt-btn-ghost");
+    a.href = href;
+    a.textContent = label;
+    if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
+    box.appendChild(a);
+  }
+  if (CONFIG.max) { addContact("Написать в Max", CONFIG.max, true); }
+  if (CONFIG.vk) { addContact("Группа во ВКонтакте", CONFIG.vk, !CONFIG.max); }
+  if (CONFIG.email) { addContact("Написать на почту", "mailto:" + CONFIG.email, !CONFIG.max && !CONFIG.vk); }
+  if (CONFIG.telegram) { addContact("Telegram", "https://t.me/" + CONFIG.telegram, false); }
+})();
+</script>
+</section>

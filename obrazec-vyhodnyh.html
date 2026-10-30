@@ -1,0 +1,139 @@
+<!--
+  ===== Образец набора «Выходные без экрана» =====
+  Вставьте блок целиком (от <section id="ob"> до </section>) на страницу сайта или откройте файл отдельно.
+  Ребёнок и события выдуманы. Ссылка на анкету: CTA_URL в конце файла.
+-->
+<section id="ob" aria-labelledby="ob-t">
+<style>
+#ob{--ink:#26305E;--soft:#4B5686;--moon:#FFC94A;--moon2:#E69F00;--mist:#EEF1FF;--line:#C5CEEE;--ok:#1F8A62;
+  font-family:"Nunito","Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--ink);line-height:1.55;max-width:760px;margin:0 auto;padding:16px;text-align:left}
+#ob *,#ob *::before,#ob *::after{box-sizing:border-box}
+#ob .ob-card{background:#fff;border:2px solid var(--line);border-radius:22px;overflow:hidden}
+#ob .ob-sky{background:var(--ink);color:#fff;padding:22px 24px;
+  background-image:radial-gradient(circle at 10% 30%,#FFC94A 0 2px,transparent 3px),radial-gradient(circle at 60% 75%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 90% 25%,#FFC94A 0 2px,transparent 3px)}
+#ob .ob-sky h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(24px,5vw,32px);line-height:1.2;margin:0 0 6px;color:#fff}
+#ob .ob-sky p{margin:0;color:#DCE1FF}
+#ob .ob-tag{display:inline-block;margin-top:10px;font-size:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px}
+#ob [role=tablist]{display:flex;gap:8px;flex-wrap:wrap;padding:16px 16px 0}
+#ob [role=tab]{font:inherit;font-weight:800;font-size:15px;min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+#ob [role=tab][aria-selected=true]{background:var(--moon);border-color:var(--moon2)}
+#ob :focus-visible{outline:3px solid var(--moon2);outline-offset:2px}
+#ob [role=tabpanel]{padding:20px 24px 26px}
+#ob [role=tabpanel][hidden]{display:none}
+#ob h3{font-family:Georgia,"Times New Roman",serif;font-size:22px;margin:0 0 10px}
+#ob h4{margin:18px 0 6px;font-size:16px}
+#ob p{margin:0 0 10px}
+#ob ul,#ob ol{margin:0 0 10px;padding-left:22px}
+#ob li{margin:0 0 5px}
+#ob .ob-invite{background:var(--mist);border:2px dashed var(--soft);border-radius:18px;padding:18px 22px;font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.7}
+#ob .ob-invite b{font-size:22px}
+#ob table{width:100%;border-collapse:collapse;font-size:15.5px}
+#ob td,#ob th{text-align:left;padding:9px 8px;border-top:1px solid var(--line);vertical-align:top}
+#ob th{font-weight:800;white-space:nowrap}
+#ob .ob-scroll{overflow-x:auto}
+#ob .ob-check{list-style:none;padding:0}
+#ob .ob-check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+#ob .ob-check input{width:22px;height:22px;margin:1px 0 0;flex:none;accent-color:var(--ok)}
+#ob .ob-note{color:var(--soft);font-size:14.5px}
+#ob .ob-cta{margin-top:18px;background:var(--mist);border-radius:18px;padding:18px 22px;text-align:center}
+#ob .ob-cta p{font-size:18px;margin-bottom:12px}
+#ob .ob-btn{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:12px 26px;border-radius:999px;border:2px solid var(--ink);background:var(--moon);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center}
+#ob .ob-btn:hover{background:#FFD978}
+</style>
+
+<div class="ob-card">
+  <div class="ob-sky">
+    <h2 id="ob-t">Дождливые выходные Артёма</h2>
+    <p>Образец недельного набора: ребёнок 6 лет, квартира, три занятия без экранов.</p>
+    <span class="ob-tag">Герои и события выдуманы</span>
+  </div>
+
+  <div role="tablist" aria-label="Части набора" id="ob-tabs">
+    <button role="tab" id="ob-tab0" aria-controls="ob-p0" aria-selected="true">Обзор</button>
+    <button role="tab" id="ob-tab1" aria-controls="ob-p1" aria-selected="false" tabindex="-1">Занятие 1</button>
+    <button role="tab" id="ob-tab2" aria-controls="ob-p2" aria-selected="false" tabindex="-1">Занятие 2</button>
+    <button role="tab" id="ob-tab3" aria-controls="ob-p3" aria-selected="false" tabindex="-1">Занятие 3</button>
+  </div>
+
+  <div role="tabpanel" id="ob-p0" aria-labelledby="ob-tab0">
+    <h3>Обзор набора</h3>
+    <p>Три занятия на дождливые выходные. Каждое можно провести за 30–60 минут, реквизит есть почти в любом доме.</p>
+    <ul>
+      <li><b>Занятие 1.</b> Театр теней (творчество, 30 минут)</li>
+      <li><b>Занятие 2.</b> Домашний вулкан (опыт, 40 минут)</li>
+      <li><b>Занятие 3.</b> Крепость из одеял (строим и играем, 60 минут)</li>
+    </ul>
+    <h4>Что понадобится на все три занятия</h4>
+    <ul><li>Фонарик, белая простыня или стена</li><li>Бумага, ножницы, палочки или карандаши</li><li>Сода, уксус, пищевой краситель, поднос</li><li>Одеяла, подушки, прищепки, стулья</li></ul>
+    <p class="ob-note">В готовом наборе также есть шаблоны фигурок для театра теней и «паспорт исследователя» для печати.</p>
+  </div>
+
+  <div role="tabpanel" id="ob-p1" aria-labelledby="ob-tab1" hidden>
+    <h3>Занятие 1. Театр теней</h3>
+    <p class="ob-note">30 минут. Подходит детям от 4 лет.</p>
+    <ol>
+      <li>Вырежьте из бумаги фигурки героев и приклейте их к палочкам.</li>
+      <li>Повесьте простыню и посветите на неё фонариком сзади.</li>
+      <li>Придумайте сказку про героев и покажите её родителям.</li>
+    </ol>
+    <p class="ob-note">Совет: если ребёнок не хочет выступать, пусть он будет режиссёром и подсказывает сюжет.</p>
+  </div>
+
+  <div role="tabpanel" id="ob-p2" aria-labelledby="ob-tab2" hidden>
+    <h3>Занятие 2. Домашний вулкан</h3>
+    <p class="ob-note">40 минут. Нужен взрослый рядом.</p>
+    <ol>
+      <li>Поставьте стакан на поднос и насыпьте в него две ложки соды.</li>
+      <li>Добавьте каплю красителя и немного средства для мытья посуды.</li>
+      <li>Влейте уксус и наблюдайте за «извержением».</li>
+      <li>Обсудите, почему пенится, и зарисуйте результат в паспорте исследователя.</li>
+    </ol>
+    <p class="ob-note">Безопасность: не трогайте глаза, а после опыта вымойте руки. Опыт делают на подносе, чтобы легко убрать.</p>
+  </div>
+
+  <div role="tabpanel" id="ob-p3" aria-labelledby="ob-tab3" hidden>
+    <h3>Занятие 3. Крепость из одеял</h3>
+    <p class="ob-note">60 минут. Можно звать друзей.</p>
+    <ol>
+      <li>Составьте стулья квадратом и накиньте одеяла сверху.</li>
+      <li>Закрепите края прищепками, постелите подушки внутрь.</li>
+      <li>Придумайте пароль для входа в крепость.</li>
+      <li>Устройте внутри чтение при фонарике.</li>
+    </ol>
+    <p class="ob-note">Совет: после игры вместе разберите крепость, и это станет ещё одной частью игры.</p>
+  </div>
+
+  <div style="padding:0 24px 24px">
+    <div class="ob-cta">
+      <p>Хотите такой же набор для своего ребёнка?</p>
+      <a class="ob-btn" id="ob-cta" href="#">Заполнить анкету</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var CTA_URL = "vyhodnye-anketa.html"; // ссылка на анкету
+  var root = document.getElementById("ob");
+  root.querySelector("#ob-cta").setAttribute("href", CTA_URL);
+  var tabs = [].slice.call(root.querySelectorAll("[role=tab]"));
+  var panels = [].slice.call(root.querySelectorAll("[role=tabpanel]"));
+  function select(i, focus) {
+    tabs.forEach(function (t, k) {
+      t.setAttribute("aria-selected", k === i ? "true" : "false");
+      t.tabIndex = k === i ? 0 : -1;
+      panels[k].hidden = k !== i;
+    });
+    if (focus) { tabs[i].focus(); }
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { select(i, false); });
+    t.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); select((i + 1) % tabs.length, true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); select((i + tabs.length - 1) % tabs.length, true); }
+    });
+  });
+})();
+</script>
+</section>

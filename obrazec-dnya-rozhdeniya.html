@@ -1,0 +1,169 @@
+<!--
+  ===== Образец комплекта «День рождения под ключ» =====
+  Вставьте блок целиком (от <section id="ob"> до </section>) на страницу сайта или откройте файл отдельно.
+  Праздник и герои выдуманы. Ссылка на анкету: CTA_URL в конце файла.
+-->
+<section id="ob" aria-labelledby="ob-t">
+<style>
+#ob{--ink:#26305E;--soft:#4B5686;--moon:#FFC94A;--moon2:#E69F00;--mist:#EEF1FF;--line:#C5CEEE;--ok:#1F8A62;
+  font-family:"Nunito","Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--ink);line-height:1.55;max-width:760px;margin:0 auto;padding:16px;text-align:left}
+#ob *,#ob *::before,#ob *::after{box-sizing:border-box}
+#ob .ob-card{background:#fff;border:2px solid var(--line);border-radius:22px;overflow:hidden}
+#ob .ob-sky{background:var(--ink);color:#fff;padding:22px 24px;
+  background-image:radial-gradient(circle at 10% 30%,#FFC94A 0 2px,transparent 3px),radial-gradient(circle at 60% 75%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 90% 25%,#FFC94A 0 2px,transparent 3px)}
+#ob .ob-sky h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(24px,5vw,32px);line-height:1.2;margin:0 0 6px;color:#fff}
+#ob .ob-sky p{margin:0;color:#DCE1FF}
+#ob .ob-tag{display:inline-block;margin-top:10px;font-size:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px}
+#ob [role=tablist]{display:flex;gap:8px;flex-wrap:wrap;padding:16px 16px 0}
+#ob [role=tab]{font:inherit;font-weight:800;font-size:15px;min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+#ob [role=tab][aria-selected=true]{background:var(--moon);border-color:var(--moon2)}
+#ob :focus-visible{outline:3px solid var(--moon2);outline-offset:2px}
+#ob [role=tabpanel]{padding:20px 24px 26px}
+#ob [role=tabpanel][hidden]{display:none}
+#ob h3{font-family:Georgia,"Times New Roman",serif;font-size:22px;margin:0 0 10px}
+#ob h4{margin:18px 0 6px;font-size:16px}
+#ob p{margin:0 0 10px}
+#ob ul,#ob ol{margin:0 0 10px;padding-left:22px}
+#ob li{margin:0 0 5px}
+#ob .ob-invite{background:var(--mist);border:2px dashed var(--soft);border-radius:18px;padding:18px 22px;font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.7}
+#ob .ob-invite b{font-size:22px}
+#ob table{width:100%;border-collapse:collapse;font-size:15.5px}
+#ob td,#ob th{text-align:left;padding:9px 8px;border-top:1px solid var(--line);vertical-align:top}
+#ob th{font-weight:800;white-space:nowrap}
+#ob .ob-scroll{overflow-x:auto}
+#ob .ob-check{list-style:none;padding:0}
+#ob .ob-check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+#ob .ob-check input{width:22px;height:22px;margin:1px 0 0;flex:none;accent-color:var(--ok)}
+#ob .ob-note{color:var(--soft);font-size:14.5px}
+#ob .ob-cta{margin-top:18px;background:var(--mist);border-radius:18px;padding:18px 22px;text-align:center}
+#ob .ob-cta p{font-size:18px;margin-bottom:12px}
+#ob .ob-btn{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:12px 26px;border-radius:999px;border:2px solid var(--ink);background:var(--moon);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center}
+#ob .ob-btn:hover{background:#FFD978}
+</style>
+
+<div class="ob-card">
+  <div class="ob-sky">
+    <h2 id="ob-t">Космический день рождения Лизы</h2>
+    <p>Образец комплекта: 7 лет, 8 гостей, двор, 2 часа, тема «космос».</p>
+    <span class="ob-tag">Герои и события выдуманы</span>
+  </div>
+
+  <div role="tablist" aria-label="Части комплекта" id="ob-tabs">
+    <button role="tab" id="ob-tab0" aria-controls="ob-p0" aria-selected="true">Приглашение</button>
+    <button role="tab" id="ob-tab1" aria-controls="ob-p1" aria-selected="false" tabindex="-1">Сценарий</button>
+    <button role="tab" id="ob-tab2" aria-controls="ob-p2" aria-selected="false" tabindex="-1">Меню и покупки</button>
+    <button role="tab" id="ob-tab3" aria-controls="ob-p3" aria-selected="false" tabindex="-1">Чек-лист</button>
+    <button role="tab" id="ob-tab4" aria-controls="ob-p4" aria-selected="false" tabindex="-1">Квест</button>
+  </div>
+
+  <div role="tabpanel" id="ob-p0" aria-labelledby="ob-tab0">
+    <h3>Приглашение</h3>
+    <div class="ob-invite">
+      <b>Экипаж, внимание!</b><br>
+      Командир Лиза набирает отряд астронавтов для секретной миссии «Потерянная звезда».<br><br>
+      <b>Когда:</b> суббота, 14:00<br>
+      <b>Где:</b> двор дома, у большой песочницы<br>
+      <b>Форма одежды:</b> удобная и яркая. Скафандры приветствуются!<br><br>
+      Подтвердите участие до среды: мама Лизы ждёт ваш ответ.
+    </div>
+    <p class="ob-note">В готовом комплекте имя, дата, место и стиль приглашения подставляются под ваш праздник. Его можно отправить в мессенджере или распечатать.</p>
+  </div>
+
+  <div role="tabpanel" id="ob-p1" aria-labelledby="ob-tab1" hidden>
+    <h3>Сценарий по часам</h3>
+    <div class="ob-scroll"><table>
+      <tr><th>14:00</th><td><b>Сбор экипажа.</b> Каждый гость получает значок астронавта и «паспорт космонавта», в который потом будут ставить печати за задания.</td></tr>
+      <tr><th>14:15</th><td><b>Разминка «Невесомость».</b> Игра «замри»: под музыку все летают, по сигналу застывают в позе космонавта.</td></tr>
+      <tr><th>14:30</th><td><b>Квест «Потерянная звезда».</b> Три задания и финальный клад (вкладка «Квест»).</td></tr>
+      <tr><th>15:15</th><td><b>Космический перекус.</b> Блюда из вкладки «Меню и покупки».</td></tr>
+      <tr><th>15:30</th><td><b>Торт и поздравление.</b> Свечи, желание, общий хор «С днём рождения».</td></tr>
+      <tr><th>15:50</th><td><b>Дипломы астронавтов.</b> Вручение, общее фото экипажа.</td></tr>
+      <tr><th>16:00</th><td><b>Финал.</b> Гости разбирают мешочки с призами.</td></tr>
+    </table></div>
+    <p class="ob-note">Запасной вариант на плохую погоду: те же задания проходят в квартире, «кратеры» и карточки переезжают в комнаты.</p>
+  </div>
+
+  <div role="tabpanel" id="ob-p2" aria-labelledby="ob-tab2" hidden>
+    <h3>Меню и список покупок</h3>
+    <h4>Меню на 8 детей</h4>
+    <ul>
+      <li>Бутерброды-звёзды (хлеб, сыр, формочка-звезда)</li>
+      <li>Мини-пиццы «Луны»</li>
+      <li>Фруктовые «планеты» на шпажках: виноград, киви, мандарины</li>
+      <li>«Лунный лимонад»</li>
+      <li>Торт с космическим декором</li>
+    </ul>
+    <h4>Список покупок</h4>
+    <ul>
+      <li>Батон — 2 шт., сыр — 400 г, помидоры черри — 300 г</li>
+      <li>Тесто и соус для мини-пицц, моцарелла — 250 г</li>
+      <li>Виноград — 1 кг, киви — 4 шт., мандарины — 6 шт.</li>
+      <li>Лимоны — 3 шт., вода — 3 л, мёд или сироп</li>
+      <li>Свечи для торта, одноразовая посуда, салфетки</li>
+    </ul>
+    <p class="ob-note">Количество считается под число гостей. Пищевые ограничения, которые вы укажете в анкете, учитываются в меню.</p>
+  </div>
+
+  <div role="tabpanel" id="ob-p3" aria-labelledby="ob-tab3" hidden>
+    <h3>Чек-лист подготовки на 2 недели</h3>
+    <ul class="ob-check">
+      <li><label><input type="checkbox"> За 14 дней: выбрать дату и список гостей</label></li>
+      <li><label><input type="checkbox"> За 10 дней: разослать приглашения</label></li>
+      <li><label><input type="checkbox"> За 7 дней: заказать или испечь торт, купить призы</label></li>
+      <li><label><input type="checkbox"> За 4 дня: собрать подтверждения от гостей</label></li>
+      <li><label><input type="checkbox"> За 3 дня: распечатать карточки квеста и дипломы</label></li>
+      <li><label><input type="checkbox"> За 2 дня: проверить погоду, решить, нужен ли запасной вариант</label></li>
+      <li><label><input type="checkbox"> Накануне: купить продукты, спрятать карточки и клад</label></li>
+      <li><label><input type="checkbox"> В день праздника: накрыть стол, подготовить музыку и фотоаппарат</label></li>
+    </ul>
+    <p class="ob-note">Нажимайте на пункты: так можно следить за подготовкой.</p>
+  </div>
+
+  <div role="tabpanel" id="ob-p4" aria-labelledby="ob-tab4" hidden>
+    <h3>Квест «Потерянная звезда»</h3>
+    <p>Легенда: звезда по имени Искорка упала во двор, и экипаж должен её найти и вернуть на небо.</p>
+    <ol>
+      <li><b>Шифр космонавта.</b> По двору спрятаны карточки с буквами. Дети находят их и собирают слово ЗВЕЗДА. За это в паспорт ставится первая печать.</li>
+      <li><b>Метеоритный дождь.</b> Нужно попасть мягкими мячиками в корзины-«кратеры». Три попадания дают вторую печать.</li>
+      <li><b>Пульт управления.</b> Команда собирает картинку-пазл «ракета». Готовый рисунок показывает, где спрятан клад.</li>
+      <li><b>Финал.</b> Клад находится, а в нём сладкие призы и «звёздная» медаль каждому.</li>
+    </ol>
+    <h4>Что нужно приготовить</h4>
+    <ul><li>Карточки с буквами и пазл (из комплекта, для печати)</li><li>8 мягких мячиков, 3 корзины или коробки</li><li>Мешочек с призами для клада</li></ul>
+    <p class="ob-note">В заказе квест подгоняется под ваш двор, посёлок или квартиру и под возраст гостей.</p>
+  </div>
+
+  <div style="padding:0 24px 24px">
+    <div class="ob-cta">
+      <p>Хотите такой же комплект для своего праздника?</p>
+      <a class="ob-btn" id="ob-cta" href="#">Заполнить анкету</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var CTA_URL = "den-rozhdeniya-anketa.html"; // ссылка на анкету
+  var root = document.getElementById("ob");
+  root.querySelector("#ob-cta").setAttribute("href", CTA_URL);
+  var tabs = [].slice.call(root.querySelectorAll("[role=tab]"));
+  var panels = [].slice.call(root.querySelectorAll("[role=tabpanel]"));
+  function select(i, focus) {
+    tabs.forEach(function (t, k) {
+      t.setAttribute("aria-selected", k === i ? "true" : "false");
+      t.tabIndex = k === i ? 0 : -1;
+      panels[k].hidden = k !== i;
+    });
+    if (focus) { tabs[i].focus(); }
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { select(i, false); });
+    t.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); select((i + 1) % tabs.length, true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); select((i + tabs.length - 1) % tabs.length, true); }
+    });
+  });
+})();
+</script>
+</section>

@@ -1,0 +1,775 @@
+<!--
+  ===== Анкета «Сказка про вашего ребёнка» =====
+  Как вставить: скопируйте ВЕСЬ этот блок (от <section> до </section>) в нужное место страницы.
+  Всё в одном файле: стили и скрипт внутри, внешние библиотеки не нужны.
+  Настройки (куда отправлять анкету, контакты, ссылка на политику) — в блоке CONFIG в самом низу, в <script>.
+-->
+<section id="skz" aria-labelledby="skz-title">
+<style>
+#skz{
+  --ink:#26305E; --ink-soft:#4B5686; --moon:#FFC94A; --moon-deep:#E69F00;
+  --mist:#EEF1FF; --line:#C5CEEE; --ok:#1F8A62; --bad:#B8334A;
+  font-family:"Nunito","Trebuchet MS","Segoe UI",system-ui,-apple-system,sans-serif;
+  color:var(--ink); line-height:1.55; max-width:760px; margin:0 auto; padding:16px;
+  box-sizing:border-box; text-align:left;
+}
+#skz *,#skz *::before,#skz *::after{box-sizing:border-box}
+#skz .skz-card{background:#fff;border:2px solid var(--line);border-radius:22px;overflow:hidden}
+
+/* Ночное небо с шестью звёздами: звезда загорается, когда глава пройдена */
+#skz .skz-sky{background:var(--ink);color:#fff;padding:24px 24px 20px}
+#skz .skz-sky h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(25px,5.5vw,34px);line-height:1.2;margin:0 0 8px;color:#fff;font-weight:700}
+#skz .skz-sky p{margin:0;color:#DCE1FF;font-size:16px;max-width:56ch}
+#skz .skz-stars{display:flex;gap:10px;margin:18px 0 8px;padding:0;list-style:none}
+#skz .skz-star svg{display:block;width:30px;height:30px;fill:none;stroke:#8E99D6;stroke-width:1.6;stroke-linejoin:round;transition:fill .35s,stroke .35s,transform .35s}
+#skz .skz-star.is-done svg{fill:var(--moon);stroke:var(--moon)}
+#skz .skz-star.is-now svg{fill:var(--moon);stroke:#fff;transform:scale(1.22)}
+#skz .skz-step{margin:0;font-size:15px;font-weight:700;color:#fff}
+
+#skz .skz-body{padding:24px}
+#skz .skz-chapter{outline:none}
+#skz .skz-chapter[hidden]{display:none}
+#skz .skz-chapter h3{font-family:Georgia,"Times New Roman",serif;font-size:clamp(22px,4.5vw,27px);line-height:1.25;margin:0 0 6px;color:var(--ink);outline:none}
+#skz .skz-lead{margin:0 0 22px;color:var(--ink-soft);font-size:16px;max-width:60ch}
+#skz .skz-sub{font-family:Georgia,"Times New Roman",serif;font-size:19px;margin:26px 0 8px;color:var(--ink)}
+
+#skz .skz-field{display:block;margin:0 0 18px}
+#skz .skz-label{display:block;font-weight:700;margin:0 0 6px;font-size:16px}
+#skz .skz-opt{font-weight:400;color:var(--ink-soft)}
+#skz .skz-hint{display:block;margin:0 0 6px;font-size:14px;color:var(--ink-soft)}
+#skz .skz-err{display:block;margin-top:6px;font-size:14px;font-weight:700;color:var(--bad)}
+#skz .skz-err:empty{display:none}
+#skz input[type=text],#skz input[type=date],#skz select,#skz textarea{
+  display:block;width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;
+  border:2px solid var(--line);border-radius:12px;padding:11px 14px;min-height:48px;
+}
+#skz textarea{resize:vertical;min-height:92px}
+#skz input:focus-visible,#skz select:focus-visible,#skz textarea:focus-visible,
+#skz button:focus-visible,#skz a:focus-visible{outline:3px solid var(--moon-deep);outline-offset:2px;border-color:var(--ink)}
+#skz [aria-invalid=true]{border-color:var(--bad)}
+#skz .skz-grid{display:grid;gap:0 16px}
+@media (min-width:600px){#skz .skz-grid-2{grid-template-columns:1fr 1fr}}
+
+/* Выбор «таблетками» */
+#skz .skz-chips{display:flex;flex-wrap:wrap;gap:8px}
+#skz .skz-chips label{position:relative;display:inline-block}
+#skz .skz-chips input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+#skz .skz-chips span{display:inline-block;padding:9px 15px;border:2px solid var(--line);border-radius:999px;background:#fff;font-size:15px}
+#skz .skz-chips input:checked + span{background:var(--moon);border-color:var(--moon-deep);font-weight:700}
+#skz .skz-chips input:checked + span::before{content:"✓ "}
+#skz .skz-chips input:focus-visible + span{outline:3px solid var(--ink);outline-offset:2px}
+
+/* Фото */
+#skz .skz-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#skz .skz-drop{display:block;border:2px dashed var(--ink-soft);border-radius:16px;padding:22px 16px;text-align:center;background:var(--mist);cursor:pointer;font-weight:700}
+#skz .skz-drop small{display:block;font-weight:400;color:var(--ink-soft);margin-top:4px;font-size:14px}
+#skz .skz-drop:focus-within{outline:3px solid var(--moon-deep);outline-offset:2px}
+#skz .skz-thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+#skz .skz-thumb{position:relative;width:92px;height:92px}
+#skz .skz-thumb img{width:100%;height:100%;object-fit:cover;border-radius:12px;border:2px solid var(--line);display:block}
+#skz .skz-thumb button{position:absolute;top:-8px;right:-8px;width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);background:#fff;color:var(--ink);font:inherit;font-weight:800;line-height:1;cursor:pointer;padding:0}
+
+/* Списки людей, друзей, питомцев */
+#skz .skz-row{border:2px dashed var(--line);border-radius:16px;padding:14px 14px 4px;margin:0 0 12px;background:var(--mist)}
+#skz .skz-row .skz-field{margin-bottom:12px}
+#skz .skz-row-foot{display:flex;justify-content:flex-end;margin:-4px 0 8px}
+
+#skz .skz-btn{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:12px 26px;border-radius:999px;border:2px solid var(--ink);background:var(--moon);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+#skz .skz-btn:hover{background:#FFD978}
+#skz .skz-btn[disabled]{opacity:.6;cursor:wait}
+#skz .skz-btn-ghost{background:#fff}
+#skz .skz-btn-ghost:hover{background:var(--mist)}
+#skz .skz-btn-small{min-height:40px;padding:8px 18px;font-size:15px}
+#skz .skz-link{font:inherit;font-size:15px;background:none;border:none;color:var(--ink-soft);text-decoration:underline;cursor:pointer;padding:6px}
+#skz .skz-nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+#skz .skz-nav .skz-spacer{flex:1}
+#skz .skz-consent{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+#skz .skz-consent input{width:24px;height:24px;margin:2px 0 0;flex:none;accent-color:var(--ink)}
+#skz .skz-consent a{color:var(--ink);font-weight:700}
+#skz .skz-done h3{font-family:Georgia,"Times New Roman",serif;font-size:26px;margin:0 0 8px;outline:none}
+#skz .skz-done textarea{min-height:200px;font-size:14px}
+#skz .skz-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+#skz .skz-note{background:var(--mist);border-radius:14px;padding:12px 16px;margin:0 0 16px;font-size:15px}
+#skz .skz-ok{color:var(--ok);font-weight:700}
+@media (prefers-reduced-motion:reduce){#skz *{transition:none!important}}
+</style>
+
+<noscript>Для заполнения анкеты нужен включённый JavaScript. Или напишите нам, и мы пришлём анкету в сообщении.</noscript>
+
+<div class="skz-card">
+  <div class="skz-sky">
+    <h2 id="skz-title">Сказка про вашего ребёнка</h2>
+    <p>Расскажите о ребёнке: чем больше живых деталей, тем теплее получится сказка. Заполнение занимает около 15 минут, обязательных вопросов совсем немного.</p>
+    <ol class="skz-stars" aria-hidden="true">
+      <li class="skz-star"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg></li>
+      <li class="skz-star"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg></li>
+      <li class="skz-star"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg></li>
+      <li class="skz-star"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg></li>
+      <li class="skz-star"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg></li>
+      <li class="skz-star"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg></li>
+    </ol>
+    <p class="skz-step" id="skz-step" aria-live="polite">Глава 1 из 6</p>
+  </div>
+
+  <div class="skz-body">
+    <form id="skz-form" novalidate>
+
+      <!-- ГЛАВА 1 -->
+      <div class="skz-chapter" data-title="Знакомьтесь, наш герой" tabindex="-1">
+        <h3 tabindex="-1">Знакомьтесь, наш герой</h3>
+        <p class="skz-lead">Начнём с главного: как зовут героя и как с вами связаться.</p>
+
+        <div class="skz-grid skz-grid-2">
+          <div class="skz-field" data-required="child_name" data-msg="Напишите имя ребёнка">
+            <label class="skz-label" for="skz-child_name">Как зовут ребёнка</label>
+            <input id="skz-child_name" name="child_name" type="text" autocomplete="off">
+            <span class="skz-err" role="alert"></span>
+          </div>
+          <div class="skz-field" data-required="child_age" data-msg="Напишите возраст ребёнка">
+            <label class="skz-label" for="skz-child_age">Сколько ему или ей лет</label>
+            <input id="skz-child_age" name="child_age" type="text" autocomplete="off" placeholder="Например, 6 лет и 3 месяца">
+            <span class="skz-err" role="alert"></span>
+          </div>
+        </div>
+
+        <div class="skz-field" data-required="gender" data-msg="Выберите: мальчик или девочка">
+          <span class="skz-label" id="skz-gender-l">Мальчик или девочка</span>
+          <span class="skz-hint">Нужно, чтобы в тексте были правильные окончания.</span>
+          <div class="skz-chips" role="radiogroup" aria-labelledby="skz-gender-l">
+            <label><input type="radio" name="gender" value="Мальчик"><span>Мальчик</span></label>
+            <label><input type="radio" name="gender" value="Девочка"><span>Девочка</span></label>
+          </div>
+          <span class="skz-err" role="alert"></span>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-nicknames">Ласковые имена и прозвища <span class="skz-opt">(по желанию)</span></label>
+          <input id="skz-nicknames" name="nicknames" type="text" autocomplete="off" placeholder="Солнышко, Мишаня, Зайка…">
+        </div>
+
+        <h4 class="skz-sub">О вас</h4>
+        <div class="skz-grid skz-grid-2">
+          <div class="skz-field" data-required="parent_name" data-msg="Напишите, как к вам обращаться">
+            <label class="skz-label" for="skz-parent_name">Ваше имя</label>
+            <input id="skz-parent_name" name="parent_name" type="text" autocomplete="name">
+            <span class="skz-err" role="alert"></span>
+          </div>
+          <div class="skz-field" data-required="contact" data-msg="Оставьте Telegram, телефон или почту">
+            <label class="skz-label" for="skz-contact">Как с вами связаться</label>
+            <input id="skz-contact" name="contact" type="text" autocomplete="off" placeholder="Telegram, телефон или почта">
+            <span class="skz-err" role="alert"></span>
+          </div>
+        </div>
+        <div class="skz-grid skz-grid-2">
+          <div class="skz-field">
+            <label class="skz-label" for="skz-who">Кем вы приходитесь ребёнку</label>
+            <select id="skz-who" name="who">
+              <option value="">Выберите</option>
+              <option>Мама</option><option>Папа</option><option>Бабушка</option><option>Дедушка</option>
+              <option>Другой родственник</option><option>Друг семьи</option>
+            </select>
+          </div>
+          <div class="skz-field">
+            <label class="skz-label" for="skz-occasion">Для чего сказка</label>
+            <select id="skz-occasion" name="occasion">
+              <option value="">Выберите</option>
+              <option>Подарок на день рождения</option><option>Подарок на Новый год</option>
+              <option>Чтобы читать на ночь</option><option>Помочь с важным событием</option><option>Просто так</option>
+            </select>
+          </div>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-deadline">К какой дате нужна сказка <span class="skz-opt">(по желанию)</span></label>
+          <input id="skz-deadline" name="deadline" type="date">
+        </div>
+      </div>
+
+      <!-- ГЛАВА 2 -->
+      <div class="skz-chapter" data-title="Внешность и характер" tabindex="-1" hidden>
+        <h3 tabindex="-1">Внешность и характер</h3>
+        <p class="skz-lead">По этим ответам мы опишем героя так, чтобы ребёнок узнал себя.</p>
+
+        <div class="skz-field">
+          <span class="skz-label" id="skz-photo-l">Фото ребёнка <span class="skz-opt">(очень желательно, до 3 штук)</span></span>
+          <label class="skz-drop" for="skz-photos">
+            Выбрать фото
+            <small>Лучше такие, где хорошо видно лицо и одежда. Формат JPG или PNG, до 8 МБ каждое.</small>
+          </label>
+          <input class="skz-sr" id="skz-photos" type="file" accept="image/*" multiple aria-describedby="skz-photo-err">
+          <div class="skz-thumbs" id="skz-thumbs"></div>
+          <span class="skz-err" id="skz-photo-err" role="alert"></span>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-look">Как он или она выглядит</label>
+          <span class="skz-hint">Цвет волос и глаз, причёска, веснушки, ямочки, в чём любит ходить.</span>
+          <textarea id="skz-look" name="look" rows="3"></textarea>
+        </div>
+
+        <div class="skz-field">
+          <span class="skz-label" id="skz-traits-l">Какой у ребёнка характер <span class="skz-opt">(отметьте подходящее)</span></span>
+          <div class="skz-chips" role="group" aria-labelledby="skz-traits-l">
+            <label><input type="checkbox" name="traits" value="добрый"><span>добрый</span></label>
+            <label><input type="checkbox" name="traits" value="смелый"><span>смелый</span></label>
+            <label><input type="checkbox" name="traits" value="застенчивый"><span>застенчивый</span></label>
+            <label><input type="checkbox" name="traits" value="любопытный"><span>любопытный</span></label>
+            <label><input type="checkbox" name="traits" value="весёлый"><span>весёлый</span></label>
+            <label><input type="checkbox" name="traits" value="упрямый"><span>упрямый</span></label>
+            <label><input type="checkbox" name="traits" value="заботливый"><span>заботливый</span></label>
+            <label><input type="checkbox" name="traits" value="мечтательный"><span>мечтательный</span></label>
+            <label><input type="checkbox" name="traits" value="непоседа"><span>непоседа</span></label>
+            <label><input type="checkbox" name="traits" value="спокойный"><span>спокойный</span></label>
+            <label><input type="checkbox" name="traits" value="творческий"><span>творческий</span></label>
+            <label><input type="checkbox" name="traits" value="самостоятельный"><span>самостоятельный</span></label>
+          </div>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-proud">Что у него или у неё получается лучше всего</label>
+          <textarea id="skz-proud" name="proud" rows="3" placeholder="Чем гордится, что умеет, за что хвалят"></textarea>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-fears">Чего боится или что даётся трудно <span class="skz-opt">(по желанию)</span></label>
+          <span class="skz-hint">Пишите только то, чем готовы поделиться. Диагнозы и медицинские подробности не нужны.</span>
+          <textarea id="skz-fears" name="fears" rows="3"></textarea>
+        </div>
+      </div>
+
+      <!-- ГЛАВА 3 -->
+      <div class="skz-chapter" data-title="Как всё начиналось" tabindex="-1" hidden>
+        <h3 tabindex="-1">Как всё начиналось</h3>
+        <p class="skz-lead">Истории из прошлого делают сказку по-настоящему личной. Достаточно одной-двух.</p>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-early">Яркие и смешные моменты из раннего детства</label>
+          <span class="skz-hint">Первые слова и шаги, забавные фразы, неожиданные поступки.</span>
+          <textarea id="skz-early" name="early" rows="4"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-toy">Любимая игрушка, одеяло или мультик, когда был совсем маленьким</label>
+          <textarea id="skz-toy" name="toy" rows="2"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-family_story">Семейная история или традиция, которую ребёнок любит вспоминать</label>
+          <textarea id="skz-family_story" name="family_story" rows="3" placeholder="Например, как ездили на море или как пекли первый торт"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-grew">Чему ребёнок научился за последний год</label>
+          <textarea id="skz-grew" name="grew" rows="3"></textarea>
+        </div>
+      </div>
+
+      <!-- ГЛАВА 4 -->
+      <div class="skz-chapter" data-title="Какой он сейчас" tabindex="-1" hidden>
+        <h3 tabindex="-1">Какой он сейчас</h3>
+        <p class="skz-lead">Любимое, привычное и обычный день героя.</p>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-hobbies">Любимые занятия и игры</label>
+          <textarea id="skz-hobbies" name="hobbies" rows="3"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-fav_media">Любимые книги, мультики и герои</label>
+          <textarea id="skz-fav_media" name="fav_media" rows="2"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-food">Любимая еда и вкусняшки</label>
+          <input id="skz-food" name="food" type="text" autocomplete="off">
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-day">Обычный день: утро, вечер, ритуал перед сном</label>
+          <textarea id="skz-day" name="day" rows="4"></textarea>
+        </div>
+
+        <h4 class="skz-sub">Садик, школа и кружки</h4>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-school">Где учится или ходит, что там нравится</label>
+          <span class="skz-hint">Садик или школа, группа или класс, любимые занятия, воспитатель или учитель.</span>
+          <textarea id="skz-school" name="school" rows="3"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-clubs">Кружки и секции <span class="skz-opt">(по желанию)</span></label>
+          <input id="skz-clubs" name="clubs" type="text" autocomplete="off">
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-phrases">Любимые словечки, фразы и смешные привычки</label>
+          <textarea id="skz-phrases" name="phrases" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- ГЛАВА 5 -->
+      <div class="skz-chapter" data-title="Кто рядом и где живёт герой" tabindex="-1" hidden>
+        <h3 tabindex="-1">Кто рядом и где живёт герой</h3>
+        <p class="skz-lead">Родные, друзья, питомцы и места, которые ребёнок любит. Все они могут стать героями сказки.</p>
+
+        <h4 class="skz-sub">Родные и близкие</h4>
+        <div id="skz-list-relatives"></div>
+        <button type="button" class="skz-btn skz-btn-ghost skz-btn-small" data-add="relatives">Добавить человека</button>
+
+        <h4 class="skz-sub">Друзья</h4>
+        <div id="skz-list-friends"></div>
+        <button type="button" class="skz-btn skz-btn-ghost skz-btn-small" data-add="friends">Добавить друга</button>
+
+        <h4 class="skz-sub">Питомцы</h4>
+        <div id="skz-list-pets"></div>
+        <button type="button" class="skz-btn skz-btn-ghost skz-btn-small" data-add="pets">Добавить питомца</button>
+
+        <h4 class="skz-sub">Дом и любимые места</h4>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-home">Где живёт ребёнок</label>
+          <span class="skz-hint">Квартира, дом, дача, двор, город или посёлок.</span>
+          <textarea id="skz-home" name="home" rows="2"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-corner">Любимое место дома или во дворе, секретный уголок</label>
+          <textarea id="skz-corner" name="corner" rows="2"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-places">Места, куда ребёнок любит ездить или ходить</label>
+          <textarea id="skz-places" name="places" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- ГЛАВА 6 -->
+      <div class="skz-chapter" data-title="Мечты и главная мысль сказки" tabindex="-1" hidden>
+        <h3 tabindex="-1">Мечты и главная мысль сказки</h3>
+        <p class="skz-lead">О чём мечтает герой и что вы хотите сказать ему этой сказкой.</p>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-dreams">О чём мечтает ребёнок</label>
+          <span class="skz-hint">Кем хочет стать, куда поехать, что увидеть, придумать или завести.</span>
+          <textarea id="skz-dreams" name="dreams" rows="3"></textarea>
+        </div>
+        <div class="skz-field">
+          <label class="skz-label" for="skz-future">Каким вы видите его или её в будущем</label>
+          <textarea id="skz-future" name="future" rows="3" placeholder="Что хотите пожелать"></textarea>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-world">В каком мире пройдёт сказка</label>
+          <select id="skz-world" name="world">
+            <option value="">На ваше усмотрение</option>
+            <option>Волшебный лес</option><option>Космос</option><option>Море и подводный мир</option>
+            <option>Страна динозавров</option><option>Замок и рыцари</option><option>Город супергероев</option>
+            <option>Мир зверей</option><option>Обычный двор, где случается чудо</option>
+          </select>
+        </div>
+
+        <div class="skz-field">
+          <span class="skz-label" id="skz-lessons-l">Чему должна научить сказка <span class="skz-opt">(отметьте подходящее)</span></span>
+          <div class="skz-chips" role="group" aria-labelledby="skz-lessons-l">
+            <label><input type="checkbox" name="lessons" value="смелость"><span>смелость</span></label>
+            <label><input type="checkbox" name="lessons" value="доброта"><span>доброта</span></label>
+            <label><input type="checkbox" name="lessons" value="дружба"><span>дружба</span></label>
+            <label><input type="checkbox" name="lessons" value="самостоятельность"><span>самостоятельность</span></label>
+            <label><input type="checkbox" name="lessons" value="терпение"><span>терпение</span></label>
+            <label><input type="checkbox" name="lessons" value="бережное отношение к вещам и природе"><span>бережность</span></label>
+            <label><input type="checkbox" name="lessons" value="не бояться темноты"><span>не бояться темноты</span></label>
+            <label><input type="checkbox" name="lessons" value="радость от садика или школы"><span>радость от садика или школы</span></label>
+            <label><input type="checkbox" name="lessons" value="мириться и делиться"><span>мириться и делиться</span></label>
+          </div>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-situation">Ситуация, которую хочется мягко проработать <span class="skz-opt">(по желанию)</span></label>
+          <span class="skz-hint">Например: первый день в садике, поход к врачу, новый братик или сестрёнка.</span>
+          <textarea id="skz-situation" name="situation" rows="3"></textarea>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-avoid">Чего в сказке быть не должно</label>
+          <span class="skz-hint">Страшные сцены, определённые персонажи, темы.</span>
+          <textarea id="skz-avoid" name="avoid" rows="2"></textarea>
+        </div>
+
+        <div class="skz-grid skz-grid-2">
+          <div class="skz-field">
+            <label class="skz-label" for="skz-length">Какой объём</label>
+            <select id="skz-length" name="length">
+              <option value="">Выберите</option>
+              <option>Короткая на ночь, 5–6 страниц</option>
+              <option>Обычная, 8–12 страниц</option>
+            </select>
+          </div>
+          <div class="skz-field">
+            <label class="skz-label" for="skz-reader">Кто будет читать</label>
+            <select id="skz-reader" name="reader">
+              <option value="">Выберите</option>
+              <option>Родители вслух</option>
+              <option>Ребёнок сам</option>
+              <option>По-разному</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="skz-field">
+          <label class="skz-label" for="skz-more">Что ещё важно рассказать <span class="skz-opt">(по желанию)</span></label>
+          <textarea id="skz-more" name="more" rows="3"></textarea>
+        </div>
+
+        <div class="skz-field" data-required="consent" data-msg="Чтобы отправить анкету, поставьте отметку согласия">
+          <label class="skz-consent">
+            <input type="checkbox" name="consent" value="yes">
+            <span>Я родитель или законный представитель ребёнка. Я согласен(на) на обработку данных ребёнка и фотографий для создания сказки. <a href="#" id="skz-privacy" target="_blank" rel="noopener">Политика конфиденциальности</a></span>
+          </label>
+          <span class="skz-err" role="alert"></span>
+        </div>
+      </div>
+
+      <div class="skz-nav">
+        <button type="button" class="skz-btn skz-btn-ghost" id="skz-back">Назад</button>
+        <span class="skz-spacer"></span>
+        <button type="button" class="skz-btn" id="skz-next">Дальше</button>
+        <button type="submit" class="skz-btn" id="skz-send" hidden>Отправить анкету</button>
+      </div>
+      <p class="skz-err" id="skz-send-err" role="alert"></p>
+    </form>
+
+    <div class="skz-done" id="skz-done" hidden></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===== НАСТРОЙКИ: меняйте только здесь ===== */
+  var CONFIG = {
+    // Адрес, куда отправлять анкету (POST, multipart/form-data: поля summary, answers, photos).
+    // Если оставить пустым, включится запасной вариант: родитель копирует анкету и отправляет её в Telegram или на почту.
+    submitUrl: "",
+    telegram: "Alex_delo",          // ник в Telegram без @
+    email: "al-vakarin@yandex.ru",  // почта для запасного варианта
+    privacyUrl: "#",                // ссылка на политику конфиденциальности
+    maxPhotos: 3,
+    maxPhotoMb: 8
+  };
+  /* ========================================== */
+
+  var root = document.getElementById("skz");
+  var form = root.querySelector("#skz-form");
+  var chapters = [].slice.call(root.querySelectorAll(".skz-chapter"));
+  var stars = [].slice.call(root.querySelectorAll(".skz-star"));
+  var stepEl = root.querySelector("#skz-step");
+  var btnBack = root.querySelector("#skz-back");
+  var btnNext = root.querySelector("#skz-next");
+  var btnSend = root.querySelector("#skz-send");
+  var sendErr = root.querySelector("#skz-send-err");
+  var doneEl = root.querySelector("#skz-done");
+  var photoInput = root.querySelector("#skz-photos");
+  var thumbs = root.querySelector("#skz-thumbs");
+  var photoErr = root.querySelector("#skz-photo-err");
+  var current = 0;
+  var photos = [];
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  root.querySelector("#skz-privacy").setAttribute("href", CONFIG.privacyUrl);
+
+  /* ---------- главы ---------- */
+  function show(n, focusHeading) {
+    current = n;
+    chapters.forEach(function (c, i) { c.hidden = i !== n; });
+    stars.forEach(function (s, i) {
+      s.className = "skz-star" + (i < n ? " is-done" : "") + (i === n ? " is-now" : "");
+    });
+    stepEl.textContent = "Глава " + (n + 1) + " из " + chapters.length;
+    btnBack.style.visibility = n === 0 ? "hidden" : "visible";
+    btnNext.hidden = n === chapters.length - 1;
+    btnSend.hidden = n !== chapters.length - 1;
+    sendErr.textContent = "";
+    root.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    if (focusHeading) {
+      var h = chapters[n].querySelector("h3");
+      if (h) { h.focus({ preventScroll: true }); }
+    }
+  }
+
+  /* ---------- проверка обязательных полей ---------- */
+  function fieldOk(f) {
+    var name = f.getAttribute("data-required");
+    var els = f.querySelectorAll('[name="' + name + '"]');
+    var ok = false, i;
+    for (i = 0; i < els.length; i++) {
+      if (els[i].type === "radio" || els[i].type === "checkbox") { if (els[i].checked) { ok = true; } }
+      else if (els[i].value.replace(/\s+/g, "")) { ok = true; }
+    }
+    var err = f.querySelector(".skz-err");
+    err.textContent = ok ? "" : f.getAttribute("data-msg");
+    if (els[0]) { els[0].setAttribute("aria-invalid", ok ? "false" : "true"); }
+    return ok;
+  }
+
+  function chapterOk(i) {
+    var fields = chapters[i].querySelectorAll("[data-required]");
+    var firstBad = null, k;
+    for (k = 0; k < fields.length; k++) {
+      if (!fieldOk(fields[k]) && !firstBad) { firstBad = fields[k]; }
+    }
+    if (firstBad) {
+      var el = firstBad.querySelector("input, select, textarea");
+      if (el) { el.focus(); }
+      return false;
+    }
+    return true;
+  }
+
+  form.addEventListener("input", function (e) {
+    var f = e.target.closest && e.target.closest("[data-required]");
+    if (f && f.querySelector(".skz-err").textContent) { fieldOk(f); }
+  });
+  form.addEventListener("change", function (e) {
+    var f = e.target.closest && e.target.closest("[data-required]");
+    if (f && f.querySelector(".skz-err").textContent) { fieldOk(f); }
+  });
+  form.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target.tagName === "INPUT" && e.target.type !== "checkbox") { e.preventDefault(); }
+  });
+
+  btnNext.addEventListener("click", function () {
+    if (chapterOk(current)) { show(current + 1, true); }
+  });
+  btnBack.addEventListener("click", function () { show(current - 1, true); });
+
+  /* ---------- фото ---------- */
+  function renderThumbs() {
+    thumbs.innerHTML = "";
+    photos.forEach(function (p, i) {
+      var box = document.createElement("div");
+      box.className = "skz-thumb";
+      var img = document.createElement("img");
+      img.src = p.url;
+      img.alt = "Фото " + (i + 1);
+      var x = document.createElement("button");
+      x.type = "button";
+      x.textContent = "×";
+      x.setAttribute("aria-label", "Убрать фото " + (i + 1));
+      x.addEventListener("click", function () {
+        URL.revokeObjectURL(p.url);
+        photos.splice(i, 1);
+        renderThumbs();
+      });
+      box.appendChild(img);
+      box.appendChild(x);
+      thumbs.appendChild(box);
+    });
+  }
+
+  photoInput.addEventListener("change", function () {
+    var msgs = [];
+    [].slice.call(photoInput.files).forEach(function (f) {
+      if (photos.length >= CONFIG.maxPhotos) {
+        if (msgs.indexOf("Можно добавить не больше " + CONFIG.maxPhotos + " фото.") < 0) { msgs.push("Можно добавить не больше " + CONFIG.maxPhotos + " фото."); }
+        return;
+      }
+      if (!/^image\//.test(f.type)) { msgs.push("Файл «" + f.name + "» не похож на фото."); return; }
+      if (f.size > CONFIG.maxPhotoMb * 1024 * 1024) { msgs.push("Фото «" + f.name + "» больше " + CONFIG.maxPhotoMb + " МБ. Выберите файл поменьше."); return; }
+      photos.push({ file: f, url: URL.createObjectURL(f) });
+    });
+    photoErr.textContent = msgs.join(" ");
+    photoInput.value = "";
+    renderThumbs();
+  });
+
+  /* ---------- списки: родные, друзья, питомцы ---------- */
+  var WHO = ["Мама", "Папа", "Брат", "Сестра", "Бабушка", "Дедушка", "Тётя", "Дядя", "Другой родственник"];
+  var LISTS = {
+    relatives: {
+      max: 8,
+      html: function () {
+        return '<div class="skz-grid skz-grid-2">' +
+          '<label class="skz-field"><span class="skz-label">Имя</span><input type="text" data-k="name" autocomplete="off"></label>' +
+          '<label class="skz-field"><span class="skz-label">Кто это</span><select data-k="who"><option value="">Выберите</option>' +
+          WHO.map(function (w) { return "<option>" + w + "</option>"; }).join("") + "</select></label></div>" +
+          '<label class="skz-field"><span class="skz-label">Как ребёнок его или её называет и чем запомнился</span><textarea data-k="note" rows="2"></textarea></label>';
+      }
+    },
+    friends: {
+      max: 8,
+      html: function () {
+        return '<label class="skz-field"><span class="skz-label">Имя друга или подруги</span><input type="text" data-k="name" autocomplete="off"></label>' +
+          '<label class="skz-field"><span class="skz-label">Чем дружат, во что играют</span><textarea data-k="note" rows="2"></textarea></label>';
+      }
+    },
+    pets: {
+      max: 6,
+      html: function () {
+        return '<div class="skz-grid skz-grid-2">' +
+          '<label class="skz-field"><span class="skz-label">Кличка</span><input type="text" data-k="name" autocomplete="off"></label>' +
+          '<label class="skz-field"><span class="skz-label">Кто это</span><input type="text" data-k="who" autocomplete="off" placeholder="Кошка, собака, хомяк…"></label></div>' +
+          '<label class="skz-field"><span class="skz-label">Характер и привычки</span><textarea data-k="note" rows="2"></textarea></label>';
+      }
+    }
+  };
+
+  function addRow(kind) {
+    var box = root.querySelector("#skz-list-" + kind);
+    if (box.children.length >= LISTS[kind].max) { return; }
+    var row = document.createElement("div");
+    row.className = "skz-row";
+    row.innerHTML = LISTS[kind].html() +
+      '<div class="skz-row-foot"><button type="button" class="skz-link">Убрать</button></div>';
+    row.querySelector(".skz-link").addEventListener("click", function () { box.removeChild(row); });
+    box.appendChild(row);
+    var first = row.querySelector("input");
+    if (first && box.children.length > 1) { first.focus(); }
+  }
+
+  [].slice.call(root.querySelectorAll("[data-add]")).forEach(function (b) {
+    b.addEventListener("click", function () { addRow(b.getAttribute("data-add")); });
+  });
+  addRow("relatives"); addRow("friends"); addRow("pets");
+
+  function readList(kind) {
+    var out = [];
+    [].slice.call(root.querySelectorAll("#skz-list-" + kind + " .skz-row")).forEach(function (row) {
+      var o = {}, any = false;
+      [].slice.call(row.querySelectorAll("[data-k]")).forEach(function (el) {
+        o[el.getAttribute("data-k")] = el.value.trim();
+        if (el.value.trim()) { any = true; }
+      });
+      if (any) { out.push(o); }
+    });
+    return out;
+  }
+
+  /* ---------- сбор ответов ---------- */
+  function val(name) {
+    var el = form.elements[name];
+    return el && el.value ? el.value.trim() : "";
+  }
+  function checked(name) {
+    return [].slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map(function (e) { return e.value; });
+  }
+
+  function collect() {
+    return {
+      child_name: val("child_name"), child_age: val("child_age"), gender: checked("gender")[0] || "",
+      nicknames: val("nicknames"), parent_name: val("parent_name"), contact: val("contact"),
+      who: val("who"), occasion: val("occasion"), deadline: val("deadline"),
+      look: val("look"), traits: checked("traits"), proud: val("proud"), fears: val("fears"),
+      early: val("early"), toy: val("toy"), family_story: val("family_story"), grew: val("grew"),
+      hobbies: val("hobbies"), fav_media: val("fav_media"), food: val("food"), day: val("day"),
+      school: val("school"), clubs: val("clubs"), phrases: val("phrases"),
+      relatives: readList("relatives"), friends: readList("friends"), pets: readList("pets"),
+      home: val("home"), corner: val("corner"), places: val("places"),
+      dreams: val("dreams"), future: val("future"), world: val("world"), lessons: checked("lessons"),
+      situation: val("situation"), avoid: val("avoid"), length: val("length"), reader: val("reader"),
+      more: val("more"), photos_count: photos.length
+    };
+  }
+
+  function summaryText(d) {
+    var L = [];
+    function line(label, v) {
+      if (Array.isArray(v)) { v = v.join(", "); }
+      if (v) { L.push(label + ": " + v); }
+    }
+    function people(title, arr, fmt) {
+      if (!arr.length) { return; }
+      L.push(title + ":");
+      arr.forEach(function (p) { L.push("  - " + fmt(p)); });
+    }
+    L.push("Анкета «Сказка про ребёнка»");
+    L.push("");
+    L.push("— Глава 1. Знакомьтесь, наш герой —");
+    line("Имя ребёнка", d.child_name); line("Возраст", d.child_age); line("Пол", d.gender);
+    line("Ласковые имена", d.nicknames); line("Родитель, контакт", d.parent_name + (d.contact ? ", " + d.contact : ""));
+    line("Кем приходится ребёнку", d.who); line("Повод", d.occasion); line("Нужно к дате", d.deadline);
+    L.push(""); L.push("— Глава 2. Внешность и характер —");
+    line("Фото приложено", d.photos_count ? d.photos_count + " шт." : "");
+    line("Внешность", d.look); line("Характер", d.traits); line("Получается лучше всего", d.proud); line("Страхи и трудности", d.fears);
+    L.push(""); L.push("— Глава 3. Как всё начиналось —");
+    line("Раннее детство", d.early); line("Любимая игрушка или мультик раньше", d.toy);
+    line("Семейная история", d.family_story); line("Чему научился за год", d.grew);
+    L.push(""); L.push("— Глава 4. Какой он сейчас —");
+    line("Занятия и игры", d.hobbies); line("Книги, мультики, герои", d.fav_media); line("Любимая еда", d.food);
+    line("Обычный день", d.day); line("Садик или школа", d.school); line("Кружки", d.clubs); line("Словечки и привычки", d.phrases);
+    L.push(""); L.push("— Глава 5. Кто рядом и где живёт герой —");
+    people("Родные и близкие", d.relatives, function (p) { return [p.name, p.who, p.note].filter(Boolean).join(", "); });
+    people("Друзья", d.friends, function (p) { return [p.name, p.note].filter(Boolean).join(", "); });
+    people("Питомцы", d.pets, function (p) { return [p.name, p.who, p.note].filter(Boolean).join(", "); });
+    line("Где живёт", d.home); line("Любимое место и уголок", d.corner); line("Любимые места", d.places);
+    L.push(""); L.push("— Глава 6. Мечты и главная мысль —");
+    line("Мечты", d.dreams); line("Каким видят в будущем", d.future); line("Мир сказки", d.world);
+    line("Чему должна научить", d.lessons); line("Ситуация для проработки", d.situation); line("Чего не должно быть", d.avoid);
+    line("Объём", d.length); line("Кто читает", d.reader); line("Ещё важно", d.more);
+    return L.join("\n");
+  }
+
+  /* ---------- отправка ---------- */
+  function lockStars() {
+    stars.forEach(function (s) { s.className = "skz-star is-done"; });
+    stepEl.textContent = "Анкета заполнена";
+  }
+
+  function showDone(summary, d, mode) {
+    form.hidden = true;
+    lockStars();
+    doneEl.hidden = false;
+    if (mode === "sent") {
+      doneEl.innerHTML = '<h3 tabindex="-1">Спасибо, анкета отправлена!</h3>' +
+        '<p class="skz-lead">Мы свяжемся с вами по контакту, который вы указали.</p>';
+    } else {
+      var intro = mode === "failed"
+        ? "Не получилось отправить анкету автоматически. Это не страшно: скопируйте текст ниже и отправьте нам."
+        : "Анкета готова. Осталось отправить её нам: скопируйте текст и отправьте в Telegram или на почту.";
+      var mailBody = "Здравствуйте! Заполнил(а) анкету для сказки про " + (d.child_name || "ребёнка") + ". Полный текст анкеты ниже:\n\n";
+      doneEl.innerHTML =
+        '<h3 tabindex="-1">' + (mode === "failed" ? "Отправим вручную" : "Анкета готова") + "</h3>" +
+        '<p class="skz-lead"></p>' +
+        '<div class="skz-actions">' +
+          '<button type="button" class="skz-btn" id="skz-copy">Скопировать анкету</button>' +
+          '<a class="skz-btn skz-btn-ghost" id="skz-tg" target="_blank" rel="noopener">Открыть Telegram</a>' +
+          '<a class="skz-btn skz-btn-ghost" id="skz-mail">Написать на почту</a>' +
+        "</div>" +
+        '<p class="skz-ok" id="skz-copied" aria-live="polite"></p>' +
+        '<p class="skz-note">Фото отправьте в том же сообщении: в анкете они не сохраняются.</p>' +
+        '<label class="skz-label" for="skz-summary">Текст анкеты</label>' +
+        '<textarea id="skz-summary" readonly></textarea>';
+      doneEl.querySelector(".skz-lead").textContent = intro;
+      doneEl.querySelector("#skz-summary").value = summary;
+      doneEl.querySelector("#skz-tg").href = "https://t.me/" + CONFIG.telegram;
+      doneEl.querySelector("#skz-mail").href = "mailto:" + CONFIG.email +
+        "?subject=" + encodeURIComponent("Анкета: сказка про " + (d.child_name || "ребёнка")) +
+        "&body=" + encodeURIComponent(mailBody);
+      doneEl.querySelector("#skz-copy").addEventListener("click", function () {
+        var done = function () { doneEl.querySelector("#skz-copied").textContent = "Скопировано. Теперь вставьте текст в сообщение."; };
+        var ta = doneEl.querySelector("#skz-summary");
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(summary).then(done, function () { ta.select(); document.execCommand("copy"); done(); });
+        } else { ta.select(); document.execCommand("copy"); done(); }
+      });
+    }
+    root.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    var h = doneEl.querySelector("h3");
+    if (h) { h.focus({ preventScroll: true }); }
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var i;
+    for (i = 0; i < chapters.length; i++) {
+      if (!chapterOk(i)) { show(i, false); chapterOk(i); return; }
+    }
+    var data = collect();
+    var summary = summaryText(data);
+
+    if (!CONFIG.submitUrl) { showDone(summary, data, "manual"); return; }
+
+    var fd = new FormData();
+    fd.append("summary", summary);
+    fd.append("answers", JSON.stringify(data));
+    photos.forEach(function (p) { fd.append("photos", p.file, p.file.name); });
+    btnSend.disabled = true;
+    btnSend.textContent = "Отправляем…";
+    fetch(CONFIG.submitUrl, { method: "POST", body: fd })
+      .then(function (r) { if (!r.ok) { throw new Error("HTTP " + r.status); } showDone(summary, data, "sent"); })
+      .catch(function () { showDone(summary, data, "failed"); });
+  });
+
+  show(0, false);
+  window.scrollTo(window.pageXOffset, window.pageYOffset);
+})();
+</script>
+</section>

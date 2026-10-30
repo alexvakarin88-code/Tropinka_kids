@@ -1,0 +1,272 @@
+<!--
+  ===== Анкета «Выходные без экрана» =====
+  Вставьте блок целиком (от <section id="wk"> до </section>) на страницу сайта или откройте файл отдельно.
+  Куда отправлять анкету, контакты и ссылка на политику: блок CONFIG в самом конце, в скрипте.
+  Вопросы и главы правятся в массиве CH там же.
+-->
+<section id="wk" aria-labelledby="wk-t">
+<style>
+#wk{--ink:#26305E;--soft:#4B5686;--moon:#FFC94A;--moon2:#E69F00;--mist:#EEF1FF;--line:#C5CEEE;--ok:#1F8A62;--bad:#B8334A;
+  font-family:"Nunito","Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--ink);line-height:1.55;max-width:760px;margin:0 auto;padding:16px;text-align:left}
+#wk *,#wk *::before,#wk *::after{box-sizing:border-box}
+#wk .wk-card{background:#fff;border:2px solid var(--line);border-radius:22px;overflow:hidden}
+#wk .wk-sky{background:var(--ink);color:#fff;padding:24px 24px 20px}
+#wk .wk-sky h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(25px,5.5vw,34px);line-height:1.2;margin:0 0 8px;color:#fff}
+#wk .wk-sky p{margin:0;color:#DCE1FF}
+#wk .wk-stars{display:flex;gap:10px;margin:18px 0 8px;padding:0;list-style:none}
+#wk .wk-star svg{display:block;width:30px;height:30px;fill:none;stroke:#8E99D6;stroke-width:1.6;stroke-linejoin:round;transition:fill .35s,stroke .35s,transform .35s}
+#wk .wk-star.done svg{fill:var(--moon);stroke:var(--moon)}
+#wk .wk-star.now svg{fill:var(--moon);stroke:#fff;transform:scale(1.22)}
+#wk .wk-step{font-weight:700;color:#fff!important}
+#wk .wk-body{padding:24px}
+#wk .wk-ch[hidden]{display:none}
+#wk h3{font-family:Georgia,"Times New Roman",serif;font-size:clamp(22px,4.5vw,27px);margin:0 0 6px;outline:none}
+#wk .wk-lead{margin:0 0 22px;color:var(--soft)}
+#wk .wk-field{margin:0 0 18px}
+#wk .wk-label{display:block;font-weight:700;margin:0 0 6px}
+#wk .wk-opt{font-weight:400;color:var(--soft)}
+#wk .wk-hint{display:block;margin:0 0 6px;font-size:14px;color:var(--soft)}
+#wk .wk-err{display:block;margin-top:6px;font-size:14px;font-weight:700;color:var(--bad)}
+#wk .wk-err:empty{display:none}
+#wk input[type=text],#wk input[type=date],#wk select,#wk textarea{display:block;width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:12px;padding:11px 14px;min-height:48px}
+#wk textarea{resize:vertical;min-height:92px}
+#wk [aria-invalid=true]{border-color:var(--bad)}
+#wk :focus-visible{outline:3px solid var(--moon2);outline-offset:2px}
+#wk .wk-chips{display:flex;flex-wrap:wrap;gap:8px}
+#wk .wk-chips label{position:relative;display:inline-block}
+#wk .wk-chips input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+#wk .wk-chips span{display:inline-block;padding:9px 15px;border:2px solid var(--line);border-radius:999px;background:#fff;font-size:15px}
+#wk .wk-chips input:checked+span{background:var(--moon);border-color:var(--moon2);font-weight:700}
+#wk .wk-chips input:checked+span::before{content:"✓ "}
+#wk .wk-chips input:focus-visible+span{outline:3px solid var(--ink);outline-offset:2px}
+#wk .wk-consent{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+#wk .wk-consent input{width:24px;height:24px;margin:2px 0 0;flex:none;accent-color:var(--ink)}
+#wk .wk-consent a{color:var(--ink);font-weight:700}
+#wk .wk-nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+#wk .wk-btn{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:12px 26px;border-radius:999px;border:2px solid var(--ink);background:var(--moon);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+#wk .wk-btn:hover{background:#FFD978}
+#wk .wk-btn.ghost{background:#fff}
+#wk .wk-btn[disabled]{opacity:.6;cursor:wait}
+#wk .wk-done textarea{min-height:200px;font-size:14px}
+#wk .wk-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+#wk .wk-ok{color:var(--ok);font-weight:700}
+@media (prefers-reduced-motion:reduce){#wk *{transition:none!important}}
+</style>
+<noscript>Для заполнения анкеты нужен включённый JavaScript. Или напишите нам, и мы пришлём анкету сообщением.</noscript>
+
+<div class="wk-card">
+  <div class="wk-sky">
+    <h2 id="wk-t">Выходные без экрана</h2>
+    <p>Расскажите о ребёнке и ваших выходных, и мы подберём занятия без гаджетов с материалами для печати. Заполнение занимает около 5 минут.</p>
+    <ol class="wk-stars" id="wk-stars" aria-hidden="true"></ol>
+    <p class="wk-step" id="wk-step" aria-live="polite"></p>
+  </div>
+  <div class="wk-body">
+    <form id="wk-form" novalidate>
+      <div id="wk-ch"></div>
+      <div class="wk-nav">
+        <button type="button" class="wk-btn ghost" id="wk-back">Назад</button>
+        <button type="button" class="wk-btn" id="wk-next">Дальше</button>
+        <button type="submit" class="wk-btn" id="wk-send" hidden>Отправить анкету</button>
+      </div>
+      <p class="wk-err" id="wk-senderr" role="alert"></p>
+    </form>
+    <div class="wk-done" id="wk-done" hidden></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===== НАСТРОЙКИ ===== */
+  var CONFIG = {
+    submitUrl: "",            // адрес приёма (POST, multipart/form-data: поля summary, answers). Пусто = запасной вариант с копированием
+    telegram: "Alex_delo",    // запасной канал, в России Telegram работает с ограничениями
+    max: "",                  // ссылка на ваш Max, например "https://max.ru/..."
+    email: "al-vakarin@yandex.ru",
+    privacyUrl: "#"
+  };
+
+  /* ===== ВОПРОСЫ: t = тип (text, textarea, date, select, chips, consent), r = обязательно ===== */
+  var CH = [
+    { t: "О ребёнке", lead: "Совсем коротко: для кого готовим идеи.", f: [
+      { n: "child_name", l: "Как зовут ребёнка или детей", t: "text", r: 1, m: "Напишите имя" },
+      { n: "ages", l: "Возраст ребёнка или детей", t: "text", r: 1, m: "Напишите возраст", p: "Например, 6 лет или 4 и 8 лет" },
+      { n: "parent_name", l: "Ваше имя", t: "text", r: 1, m: "Напишите, как к вам обращаться" },
+      { n: "contact", l: "Как с вами связаться", t: "text", r: 1, m: "Оставьте телефон, почту или Max" }
+    ]},
+    { t: "Ваши выходные", lead: "Так мы подберём занятия, которые реально получится провести.", f: [
+      { n: "place", l: "Где вы обычно проводите выходные", t: "select", r: 1, m: "Выберите вариант",
+        o: ["Квартира", "Дом или дача", "Двор и улица рядом", "Разные места"] },
+      { n: "time", l: "Сколько времени можно отвести на одно занятие", t: "select", o: ["20–30 минут", "около часа", "1–2 часа", "по-разному"] },
+      { n: "interests", l: "Что нравится ребёнку", t: "chips",
+        o: ["Творчество", "Опыты и наука", "Подвижные игры", "Строить и собирать", "Готовить", "Книги и истории", "Природа", "Настольные игры"] },
+      { n: "supplies", l: "Что есть дома", t: "chips",
+        o: ["Бумага и краски", "Конструктор", "Настольные игры", "Кухня для готовки", "Двор или улица рядом", "Ничего особенного"] },
+      { n: "avoid", l: "Чего лучше избегать", t: "textarea", h: "Например, много шума, мелкие детали, краски." },
+      { n: "freq", l: "Как часто присылать идеи", t: "select", o: ["Каждую неделю", "Раз в две недели", "Один раз, чтобы попробовать"] },
+      { n: "wishes", l: "Что ещё важно рассказать", t: "textarea" },
+      { n: "consent", t: "consent", r: 1, m: "Чтобы отправить анкету, поставьте отметку согласия" }
+    ]}
+  ];
+  /* ================================ */
+
+  var root = document.getElementById("wk");
+  var form = root.querySelector("#wk-form"), holder = root.querySelector("#wk-ch");
+  var starsEl = root.querySelector("#wk-stars"), stepEl = root.querySelector("#wk-step");
+  var back = root.querySelector("#wk-back"), nextB = root.querySelector("#wk-next"), send = root.querySelector("#wk-send");
+  var senderr = root.querySelector("#wk-senderr"), doneEl = root.querySelector("#wk-done");
+  var STAR = '<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg>';
+  var cur = 0, chapters = [], reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function el(t, c, x) { var e = document.createElement(t); if (c) { e.className = c; } if (x != null) { e.textContent = x; } return e; }
+
+  function field(f) {
+    var w = el("div", "wk-field"), id = "wk-" + f.n;
+    w.setAttribute("data-n", f.n);
+    if (f.r) { w.setAttribute("data-r", "1"); w.setAttribute("data-m", f.m || "Заполните это поле"); }
+    if (f.t === "consent") {
+      w.innerHTML = '<label class="wk-consent"><input type="checkbox" name="consent" value="yes"><span>Я родитель или законный представитель ребёнка. Согласен(на) на обработку данных для подготовки комплекта. <a href="#" target="_blank" rel="noopener">Политика конфиденциальности</a></span></label>';
+      w.querySelector("a").href = CONFIG.privacyUrl;
+    } else {
+      var lab = el(f.t === "chips" ? "span" : "label", "wk-label", f.l);
+      if (f.t !== "chips") { lab.setAttribute("for", id); }
+      if (!f.r) { lab.appendChild(el("span", "wk-opt", " (по желанию)")); }
+      w.appendChild(lab);
+      if (f.h) { w.appendChild(el("span", "wk-hint", f.h)); }
+      var c;
+      if (f.t === "textarea") { c = el("textarea"); c.rows = 3; }
+      else if (f.t === "select") {
+        c = el("select"); c.appendChild(el("option", "", "Выберите")).value = "";
+        f.o.forEach(function (o) { c.appendChild(el("option", "", o)); });
+      } else if (f.t === "chips") {
+        c = el("div", "wk-chips"); c.setAttribute("role", "group");
+        f.o.forEach(function (o) {
+          var l = el("label"), i = el("input"), s = el("span", "", o);
+          i.type = "checkbox"; i.name = f.n; i.value = o; l.appendChild(i); l.appendChild(s); c.appendChild(l);
+        });
+      } else { c = el("input"); c.type = f.t; c.autocomplete = "off"; if (f.p) { c.placeholder = f.p; } }
+      if (f.t !== "chips") { c.id = id; c.name = f.n; }
+      w.appendChild(c);
+    }
+    w.appendChild(el("span", "wk-err")).setAttribute("role", "alert");
+    return w;
+  }
+
+  CH.forEach(function (c, i) {
+    var s = el("div", "wk-ch"); s.hidden = i > 0;
+    var h = el("h3", "", c.t); h.tabIndex = -1; s.appendChild(h);
+    s.appendChild(el("p", "wk-lead", c.lead));
+    c.f.forEach(function (f) { s.appendChild(field(f)); });
+    holder.appendChild(s); chapters.push(s);
+    var li = el("li", "wk-star"); li.innerHTML = STAR; starsEl.appendChild(li);
+  });
+
+  function show(n, focus) {
+    cur = n;
+    chapters.forEach(function (c, i) { c.hidden = i !== n; });
+    [].slice.call(starsEl.children).forEach(function (s, i) { s.className = "wk-star" + (i < n ? " done" : "") + (i === n ? " now" : ""); });
+    stepEl.textContent = "Глава " + (n + 1) + " из " + CH.length;
+    back.style.visibility = n === 0 ? "hidden" : "visible";
+    nextB.hidden = n === CH.length - 1; send.hidden = n !== CH.length - 1;
+    senderr.textContent = "";
+    root.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    if (focus) { chapters[n].querySelector("h3").focus({ preventScroll: true }); }
+  }
+
+  function val(n) {
+    var e = form.elements[n];
+    if (!e) { return ""; }
+    if (e.length && e[0] && e[0].type === "checkbox") {
+      return [].slice.call(form.querySelectorAll('input[name="' + n + '"]:checked')).map(function (x) { return x.value; }).join(", ");
+    }
+    if (e.type === "checkbox") { return e.checked ? "да" : ""; }
+    return (e.value || "").trim();
+  }
+
+  function chapterOk(i) {
+    var bad = null;
+    [].slice.call(chapters[i].querySelectorAll("[data-r]")).forEach(function (w) {
+      var ok = !!val(w.getAttribute("data-n"));
+      w.querySelector(".wk-err").textContent = ok ? "" : w.getAttribute("data-m");
+      var c = w.querySelector("input,select,textarea"); if (c) { c.setAttribute("aria-invalid", ok ? "false" : "true"); }
+      if (!ok && !bad) { bad = c; }
+    });
+    if (bad) { bad.focus(); }
+    return !bad;
+  }
+
+  form.addEventListener("input", function (e) {
+    var w = e.target.closest("[data-r]");
+    if (w && w.querySelector(".wk-err").textContent && val(w.getAttribute("data-n"))) { w.querySelector(".wk-err").textContent = ""; e.target.setAttribute("aria-invalid", "false"); }
+  });
+  form.addEventListener("change", function (e) {
+    var w = e.target.closest("[data-r]");
+    if (w && val(w.getAttribute("data-n"))) { w.querySelector(".wk-err").textContent = ""; }
+  });
+  form.addEventListener("keydown", function (e) { if (e.key === "Enter" && e.target.tagName === "INPUT" && e.target.type !== "checkbox") { e.preventDefault(); } });
+  nextB.addEventListener("click", function () { if (chapterOk(cur)) { show(cur + 1, true); } });
+  back.addEventListener("click", function () { show(cur - 1, true); });
+
+  function collect() {
+    var a = {}, L = ["Анкета «Выходные без экрана»"];
+    CH.forEach(function (c, i) {
+      L.push("", "— Глава " + (i + 1) + ". " + c.t + " —");
+      c.f.forEach(function (f) {
+        if (f.t === "consent") { return; }
+        var v = val(f.n); a[f.n] = v;
+        if (v) { L.push(f.l + ": " + v); }
+      });
+    });
+    return { answers: a, summary: L.join("\n") };
+  }
+
+  function finish(r, mode) {
+    form.hidden = true; doneEl.hidden = false;
+    [].slice.call(starsEl.children).forEach(function (s) { s.className = "wk-star done"; });
+    stepEl.textContent = "Анкета заполнена";
+    if (mode === "sent") {
+      doneEl.innerHTML = '<h3 tabindex="-1">Спасибо, анкета отправлена!</h3><p class="wk-lead">Мы свяжемся с вами по контакту, который вы указали.</p>';
+    } else {
+      var who = r.answers.child_name || "ребёнка";
+      doneEl.innerHTML = '<h3 tabindex="-1"></h3><p class="wk-lead"></p>' +
+        '<div class="wk-actions"><button type="button" class="wk-btn" id="wk-copy">Скопировать анкету</button></div>' +
+        '<p class="wk-ok" id="wk-copied" aria-live="polite"></p>' +
+        '<label class="wk-label" for="wk-sum">Текст анкеты</label><textarea id="wk-sum" readonly></textarea>';
+      doneEl.querySelector("h3").textContent = mode === "failed" ? "Отправим вручную" : "Анкета готова";
+      doneEl.querySelector(".wk-lead").textContent = mode === "failed"
+        ? "Не получилось отправить автоматически. Скопируйте текст и отправьте нам."
+        : "Осталось отправить анкету нам: скопируйте текст и отправьте сообщением.";
+      var ta = doneEl.querySelector("#wk-sum"); ta.value = r.summary;
+      var acts = doneEl.querySelector(".wk-actions");
+      function link(label, href) { var a = el("a", "wk-btn ghost", label); a.href = href; if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; } acts.appendChild(a); }
+      if (CONFIG.max) { link("Открыть Max", CONFIG.max); }
+      if (CONFIG.email) { link("Написать на почту", "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent("Анкета: выходные без экрана, " + who) + "&body=" + encodeURIComponent("Здравствуйте! Заполнил(а) анкету, полный текст ниже:\n\n")); }
+      if (CONFIG.telegram) { link("Telegram", "https://t.me/" + CONFIG.telegram); }
+      doneEl.querySelector("#wk-copy").addEventListener("click", function () {
+        var ok = function () { doneEl.querySelector("#wk-copied").textContent = "Скопировано. Теперь вставьте текст в сообщение."; };
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(r.summary).then(ok, function () { ta.select(); document.execCommand("copy"); ok(); }); }
+        else { ta.select(); document.execCommand("copy"); ok(); }
+      });
+    }
+    root.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    doneEl.querySelector("h3").focus({ preventScroll: true });
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    for (var i = 0; i < chapters.length; i++) { if (!chapterOk(i)) { show(i, false); chapterOk(i); return; } }
+    var r = collect();
+    if (!CONFIG.submitUrl) { finish(r, "manual"); return; }
+    var fd = new FormData(); fd.append("summary", r.summary); fd.append("answers", JSON.stringify(r.answers));
+    send.disabled = true; send.textContent = "Отправляем…";
+    fetch(CONFIG.submitUrl, { method: "POST", body: fd })
+      .then(function (x) { if (!x.ok) { throw new Error(x.status); } finish(r, "sent"); })
+      .catch(function () { finish(r, "failed"); });
+  });
+
+  show(0, false);
+})();
+</script>
+</section>

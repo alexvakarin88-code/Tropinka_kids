@@ -1,0 +1,143 @@
+<!--
+  ===== Образец сказки «Мирон и звёздочка Искорка» =====
+  Вставьте блок целиком (от <section id="smp"> до </section>) на страницу сайта или откройте файл отдельно.
+  Герой и все события выдуманы. Ссылка на анкету меняется в CTA_URL в конце файла.
+-->
+<section id="smp" aria-labelledby="smp-t">
+<style>
+#smp{--ink:#26305E;--soft:#4B5686;--moon:#FFC94A;--moon2:#E69F00;--mist:#EEF1FF;--line:#C5CEEE;
+  font-family:"Nunito","Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--ink);line-height:1.55;max-width:720px;margin:0 auto;padding:16px;text-align:left}
+#smp *,#smp *::before,#smp *::after{box-sizing:border-box}
+#smp .smp-book{background:#fff;border:2px solid var(--line);border-radius:24px;overflow:hidden}
+#smp .smp-sky{background:#26305E;color:#fff;padding:18px 24px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;
+  background-image:radial-gradient(circle at 12% 30%,#FFC94A 0 2px,transparent 3px),radial-gradient(circle at 55% 70%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 88% 25%,#FFC94A 0 2px,transparent 3px)}
+#smp .smp-sky b{font-family:Georgia,"Times New Roman",serif;font-size:19px}
+#smp .smp-tag{font-size:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px}
+#smp .smp-body{padding:clamp(22px,5vw,40px)}
+#smp .smp-page[hidden]{display:none}
+#smp h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(26px,5.5vw,36px);line-height:1.2;margin:0 0 10px}
+#smp .smp-page p{font-family:Georgia,"Times New Roman",serif;font-size:clamp(18px,3.2vw,21px);line-height:1.75;margin:0 0 14px}
+#smp .smp-note{color:var(--soft);font-family:inherit;font-size:15px}
+#smp .smp-cover{text-align:center;padding:12px 0}
+#smp mark{background:transparent;color:inherit;border-radius:6px;padding:0 2px}
+#smp.hl mark{background:#FFE79A;box-shadow:0 0 0 2px #FFE79A}
+#smp .smp-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px}
+#smp .smp-count{color:var(--soft);font-weight:700;font-size:15px}
+#smp .smp-btn{font:inherit;font-weight:800;font-size:16px;min-height:48px;padding:12px 24px;border-radius:999px;border:2px solid var(--ink);background:var(--moon);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+#smp .smp-btn:hover{background:#FFD978}
+#smp .smp-btn.ghost{background:#fff}
+#smp .smp-btn[disabled]{opacity:.45;cursor:default}
+#smp :focus-visible{outline:3px solid var(--moon2);outline-offset:2px}
+#smp .smp-tools{margin-top:18px;background:var(--mist);border-radius:18px;padding:14px 18px}
+#smp .smp-tools label{display:flex;gap:10px;align-items:center;font-weight:700;cursor:pointer}
+#smp .smp-tools input{width:22px;height:22px;accent-color:var(--ink)}
+#smp .smp-tools ul{margin:10px 0 0;padding-left:20px;color:var(--soft);font-size:15px}
+#smp .smp-cta{text-align:center;padding:8px 0}
+#smp .smp-cta p{font-family:inherit;font-size:18px}
+</style>
+
+<div class="smp-book">
+  <div class="smp-sky"><b>Образец сказки</b><span class="smp-tag">Герой и события выдуманы</span></div>
+  <div class="smp-body">
+
+    <article class="smp-page smp-cover">
+      <h2 id="smp-t">Мирон и звёздочка Искорка</h2>
+      <p class="smp-note">Сказка, написанная для Мирона, 6 лет. Тема: «не бояться темноты».</p>
+      <p class="smp-note">Так будет выглядеть сказка про вашего ребёнка. Листайте страницы кнопкой «Дальше».</p>
+    </article>
+
+    <article class="smp-page" hidden>
+      <p>Жил-был мальчик по имени <mark>Мирон</mark>. Ему было <mark>шесть лет</mark>, и больше всего на свете он любил <mark>динозавров</mark>. На его полке жили целых двенадцать: и грозный тираннозавр, и добрый диплодок. Ещё у Мирона были <mark>красные кеды</mark>, в которых он бегал быстрее ветра, и рыжий кот <mark>Пирожок</mark>, который спал у него в ногах.</p>
+      <p>А мечтал Мирон стать <mark>капитаном космического корабля</mark>.</p>
+    </article>
+
+    <article class="smp-page" hidden>
+      <p>Мирон был храбрым почти всегда. Почти. Вечером, когда гасили свет, коридор между его комнатой и кухней становился длинным-предлинным и тёмным-претёмным. Из темноты что-то шуршало, и Мирон мчался по коридору так быстро, что даже тапки не успевали испугаться.</p>
+    </article>
+
+    <article class="smp-page" hidden>
+      <p>Однажды ночью Пирожок вдруг замяукал у окна. Мирон выглянул: по небу, оставляя серебряный след, катилась крошечная звёздочка. Она тихонько упала на подоконник и сказала тоненьким голосом:</p>
+      <p>— Меня зовут Искорка. Я потерялась и не могу найти дорогу домой. Мне нужно выйти на балкон, но идти по тёмному коридору одной страшно.</p>
+    </article>
+
+    <article class="smp-page" hidden>
+      <p>Мирон вздохнул. Коленки у него задрожали. Но он вспомнил, что всегда говорит <mark>бабушка Валя</mark>: «Смелость — это когда страшно, а ты всё равно идёшь».</p>
+      <p>— Я помогу тебе, — сказал он. — Пойдём вместе.</p>
+      <p>Искорка засветилась мягким светом, а Пирожок гордо поднял хвост и пошёл впереди.</p>
+    </article>
+
+    <article class="smp-page" hidden>
+      <p>Они вышли в коридор. У стены стояло что-то большое и тёмное.</p>
+      <p>— Динозавр! — прошептал Мирон.</p>
+      <p>Но Искорка подлетела поближе, и стало видно: это просто велосипед, на котором они с <mark>другом Тёмой</mark> катались летом. А потом что-то зашуршало. Мирон зажмурился, а это Пирожок хвостом задел бабушкины тапки.</p>
+    </article>
+
+    <article class="smp-page" hidden>
+      <p>С каждым шагом Мирон шёл всё увереннее, а Искорка светила всё ярче: чем смелее был его шаг, тем ярче горела звёздочка. Так они дошли до балкона.</p>
+      <p>Искорка вспорхнула в небо, а на прощание шепнула:</p>
+      <p>— Спасибо, капитан!</p>
+    </article>
+
+    <article class="smp-page" hidden>
+      <p>Мирон вернулся в кровать. В коридоре по-прежнему было темно, но теперь он знал: в темноте живёт всё то же самое, что и днём. Просто свет выключен.</p>
+      <p>Бабушка Валя заглянула в комнату:</p>
+      <p>— Что-то ты сегодня сияешь, внук.</p>
+      <p>— Это я капитан, — улыбнулся Мирон.</p>
+      <p>На потолке мигнула маленькая звёздочка, будто подмигнула. Мирон заснул, а Пирожок мурлыкал всю ночь. Конец.</p>
+    </article>
+
+    <article class="smp-page smp-cta" hidden>
+      <h2>Хотите такую же про вашего ребёнка?</h2>
+      <p>Заполните анкету, и мы напишем сказку с его именем, друзьями, питомцами и мечтой.</p>
+      <a class="smp-btn" id="smp-cta" href="#">Заполнить анкету</a>
+    </article>
+
+    <div class="smp-nav">
+      <button type="button" class="smp-btn ghost" id="smp-prev">Назад</button>
+      <span class="smp-count" id="smp-count" aria-live="polite"></span>
+      <button type="button" class="smp-btn" id="smp-next">Дальше</button>
+    </div>
+
+    <div class="smp-tools">
+      <label><input type="checkbox" id="smp-hl"> Подсветить детали из анкеты</label>
+      <ul>
+        <li>Имя и возраст ребёнка</li>
+        <li>Любимое: динозавры и красные кеды</li>
+        <li>Питомец, друг и бабушка</li>
+        <li>Мечта: стать капитаном</li>
+        <li>Тема сказки: страх темноты</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var CTA_URL = "skazka-anketa.html"; // ссылка на анкету сказки
+  var root = document.getElementById("smp");
+  var pages = [].slice.call(root.querySelectorAll(".smp-page"));
+  var prev = root.querySelector("#smp-prev"), next = root.querySelector("#smp-next");
+  var count = root.querySelector("#smp-count"), cur = 0;
+  root.querySelector("#smp-cta").setAttribute("href", CTA_URL);
+  function show(n) {
+    cur = Math.max(0, Math.min(pages.length - 1, n));
+    pages.forEach(function (p, i) { p.hidden = i !== cur; });
+    prev.disabled = cur === 0;
+    next.disabled = cur === pages.length - 1;
+    count.textContent = cur === 0 ? "Обложка" : "Страница " + cur + " из " + (pages.length - 1);
+  }
+  prev.addEventListener("click", function () { show(cur - 1); });
+  next.addEventListener("click", function () { show(cur + 1); });
+  root.addEventListener("keydown", function (e) {
+    if (e.target.tagName === "INPUT") { return; }
+    if (e.key === "ArrowRight") { show(cur + 1); }
+    if (e.key === "ArrowLeft") { show(cur - 1); }
+  });
+  root.querySelector("#smp-hl").addEventListener("change", function (e) {
+    root.classList.toggle("hl", e.target.checked);
+  });
+  show(0);
+})();
+</script>
+</section>
