@@ -1,3 +1,14 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f2e8">
+  <meta name="description" content="Тропинка — сказки, квесты и праздники для детей.">
+  <title>Анкета — Сказка про вашего ребёнка | Тропинка</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
 <!--
   ===== Анкета «Сказка про вашего ребёнка» =====
   Как вставить: скопируйте ВЕСЬ этот блок (от <section> до </section>) в нужное место страницы.
@@ -411,7 +422,7 @@
         <div class="skz-field" data-required="consent" data-msg="Чтобы отправить анкету, поставьте отметку согласия">
           <label class="skz-consent">
             <input type="checkbox" name="consent" value="yes">
-            <span>Я родитель или законный представитель ребёнка. Я согласен(на) на обработку данных ребёнка и фотографий для создания сказки. <a href="#" id="skz-privacy" target="_blank" rel="noopener">Политика конфиденциальности</a></span>
+            <span>Я родитель или законный представитель ребёнка. Я согласен(на) на обработку данных ребёнка и фотографий для создания сказки. <a href="privacy.html" id="skz-privacy" target="_blank" rel="noopener">Политика конфиденциальности</a></span>
           </label>
           <span class="skz-err" role="alert"></span>
         </div>
@@ -441,7 +452,7 @@
     submitUrl: "",
     telegram: "Alex_delo",          // ник в Telegram без @
     email: "al-vakarin@yandex.ru",  // почта для запасного варианта
-    privacyUrl: "#",                // ссылка на политику конфиденциальности
+    privacyUrl: "privacy.html",                // ссылка на политику конфиденциальности
     maxPhotos: 3,
     maxPhotoMb: 8
   };
@@ -773,3 +784,6 @@
 })();
 </script>
 </section>
+
+</body>
+</html>
