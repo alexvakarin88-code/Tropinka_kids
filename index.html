@@ -306,9 +306,10 @@ body { background:#f7f5e9 !important; }
       weekend:  { url: "vyhodnye-anketa.html", sample: "obrazec-vyhodnyh.html" }
     },
 
-    // Контакты (пустые не показываются). Telegram оставлен запасным: в России он работает с ограничениями.
+    // Контакты (пустые не показываются). MAX для личных заявок и отдельная ссылка на канал.
     email: "al-vakarin@yandex.ru",
-    max: "https://max.ru/join/3kWVRG_Eb1b443Pf8UUkGIJOP78rEGDZ-yPQugYHejs",   // приглашение в канал Тропинка в Max
+    max: "https://max.ru/u/f9LHodD0cOIHAlvhLJwrfuPTBusHcOWxSZyOVfwWYsinvA21DFJYPw5Mdzc", // личные сообщения MAX
+    maxChannel: "https://max.ru/channel_tropinka_channel_games", // публичный канал
     vk: "",        // например, "https://vk.com/..."
     telegram: "Alex_delo",
 
@@ -385,7 +386,8 @@ body { background:#f7f5e9 !important; }
     if (/^https?:/.test(href)) { a.target = "_blank"; a.rel = "noopener"; }
     box.appendChild(a);
   }
-  if (CONFIG.max) { addContact("Написать в Max", CONFIG.max, true); }
+  if (CONFIG.max) { addContact("Написать в MAX", CONFIG.max, true); }
+   if (CONFIG.maxChannel) { addContact("Наш канал в MAX", CONFIG.maxChannel, false); }
   if (CONFIG.vk) { addContact("Группа во ВКонтакте", CONFIG.vk, !CONFIG.max); }
   if (CONFIG.email) { addContact("Написать на почту", "mailto:" + CONFIG.email, !CONFIG.max && !CONFIG.vk); }
   if (CONFIG.telegram) { addContact("Telegram", "https://t.me/" + CONFIG.telegram, false); }
