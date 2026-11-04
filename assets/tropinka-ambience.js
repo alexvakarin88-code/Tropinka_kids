@@ -17,8 +17,8 @@
     var b=document.createElement("button");
     b.type="button";b.className="tp-music-toggle";
     b.setAttribute("aria-pressed","false");
-    b.setAttribute("aria-label","Включить музыку и весёлые звуки");
-    b.textContent="♫ Музыка и смех";
+    b.setAttribute("aria-label","Включить спокойную музыку и звуки детского смеха");
+    b.textContent="Включить музыку";
     b.title="Музыка включится после первого нажатия или прикосновения к сайту";
     b.addEventListener("click",function(){if(active)stop();else start(true);});
     document.body.appendChild(b);
@@ -26,10 +26,10 @@
   }
   function label(on){
     if(!button)return;
-    button.textContent=on?"♫ Музыка и смех · выключить":"♫ Музыка и смех";
+    button.textContent=on?"Музыка играет · выключить":"Включить музыку";
     button.setAttribute("aria-pressed",on?"true":"false");
-    button.setAttribute("aria-label",on?"Выключить музыку и весёлые звуки":"Включить музыку и весёлые звуки");
-    button.title=on?"Выключить музыку и звуковые эффекты":"Музыка включится после первого нажатия или прикосновения к сайту";
+    button.setAttribute("aria-label",on?"Выключить музыку и звуки детского смеха":"Включить спокойную музыку и звуки детского смеха");
+    button.title=on?"Выключить музыку и звуковые эффекты":"Спокойная музыка и редкие мягкие смешки включатся после первого действия на сайте";
   }
   function prepare(){
     if(ctx)return;
