@@ -84,8 +84,8 @@
     .products-section{background:#f2f4eb}
     .products-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
     .product-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:25px;background:var(--paper);box-shadow:0 8px 26px rgba(36,75,55,.05)}
-    .product-image{height:260px;padding:12px;background:linear-gradient(145deg,#edf2e6,#faf6e9);display:grid;place-items:center}
-    .product-image img{width:100%;height:100%;object-fit:contain;object-position:center}
+    .product-image{height:auto;aspect-ratio:16/9;padding:0;background:#eaf0e5;display:block;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover;object-position:center 52%;}
+    .product-image img{width:100%;height:100%;object-fit:cover;object-position:center 52%;}
     .product-content{display:flex;flex:1;flex-direction:column;padding:24px}
     .product-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
     .product-category{font-size:12px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf)}
@@ -98,7 +98,7 @@
     .product-meta{margin:auto 0 14px;color:#718075;font-size:12px}
     .product-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .product-actions .button{padding-inline:12px;font-size:14px}
-    .sample-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .sample-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
     .sample-card{padding:23px;border:1px solid var(--line);border-radius:20px;background:#fff}
     .sample-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:var(--mist);font-size:24px}
     .sample-card h3{margin:15px 0 7px;color:var(--forest);font-size:21px}
@@ -139,7 +139,7 @@
       .hero-copy{max-width:680px;padding-right:28%}
       .hero-art{width:48%}
       .hero-art:before{background:linear-gradient(90deg,var(--forest) 0%,rgba(36,75,55,.55) 55%,rgba(36,75,55,.08) 100%)}
-      .product-image{height:220px}
+      .product-image{height:auto;aspect-ratio:16/9}
     }
     @media(max-width:640px){
       html{scroll-padding-top:76px}
@@ -327,7 +327,7 @@
               <p class="product-meta">Есть готовый, стандартный и премиальный комплекты</p>
               <div class="product-actions">
                 <a class="button" href="https://alexvakarin88-code.github.io/questin/">Выбрать квест</a>
-                <a class="button button-secondary" href="https://alexvakarin88-code.github.io/questin/#quest">Посмотреть пример</a>
+                <a class="button button-secondary" href="obrazec-kvesta.html">Посмотреть пример</a>
               </div>
             </div>
           </article>
@@ -374,6 +374,12 @@
             <h3>День рождения</h3>
             <p>План подготовки, идеи праздника и задания для маленьких гостей.</p>
             <a class="text-link" href="obrazec-dnya-rozhdeniya.html">Открыть образец <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="sample-card">
+            <span class="sample-icon" aria-hidden="true">🗺️</span>
+            <h3>Детский квест</h3>
+            <p>Пример карточки задания с загадкой, подсказкой и переходом к следующей точке.</p>
+            <a class="text-link" href="obrazec-kvesta.html">Посмотреть образец <span aria-hidden="true">→</span></a>
           </article>
           <article class="sample-card">
             <span class="sample-icon" aria-hidden="true">🧭</span>
