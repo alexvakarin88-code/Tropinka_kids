@@ -471,7 +471,7 @@ a{color:var(--tp-green-dark)}
   /* ===== НАСТРОЙКИ: меняйте только здесь ===== */
   var CONFIG = {
     // Адрес, куда отправлять анкету (POST, multipart/form-data: поля summary, answers, photos).
-    // Если оставить пустым, включится запасной вариант: родитель копирует анкету и отправляет её в Telegram или на почту.
+    // Если оставить пустым, включится запасной вариант: родитель копирует анкету и отправляет её через MAX, Telegram или почту.
     submitUrl: "",
     telegram: "Alex_delo",          // ник в Telegram без @
     max: "https://max.ru/u/f9LHodD0cOIHAlvhLJwrfuPTBusHcOWxSZyOVfwWYsinvA21DFJYPw5Mdzc", // личные сообщения в MAX
@@ -755,8 +755,8 @@ a{color:var(--tp-green-dark)}
         '<p class="skz-lead"></p>' +
         '<div class="skz-actions">' +
           '<button type="button" class="skz-btn" id="skz-copy">Скопировать анкету</button>' +
-          '<a class="skz-btn skz-btn-ghost" id="skz-max" target="_blank" rel="noopener">Открыть MAX</a>
-          <a class="skz-btn skz-btn-ghost" id="skz-tg" target="_blank" rel="noopener">Открыть Telegram</a>' +
+          '<a class="skz-btn skz-btn-ghost" id="skz-max" target="_blank" rel="noopener">Открыть MAX</a>' +
+          '<a class="skz-btn skz-btn-ghost" id="skz-tg" target="_blank" rel="noopener">Открыть Telegram</a>' +
           '<a class="skz-btn skz-btn-ghost" id="skz-mail">Написать на почту</a>' +
         "</div>" +
         '<p class="skz-ok" id="skz-copied" aria-live="polite"></p>' +
