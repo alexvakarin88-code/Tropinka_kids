@@ -98,3 +98,31 @@ input:focus,textarea:focus,select:focus{outline-color:#e3b653!important}
 @media(prefers-reduced-motion:reduce){
  .sunny-cloud{animation:none!important}
 }
+
+/* Дополнительные токены и оформление генератора/квестов */
+:root{
+ --bg:#e5f5ff;--bg2:#fff3d2;--card:#fffefa;--tx:#5c452b;--mut:#7c6b55;
+ --a:#e8b650;--b:#c88d38;--c:#88b77a;--d:#d98774;--bd:#efdfb9;--on:#fff;
+ --ink:#5c452b;--green:#d49b3c;--deep:#95672e;--cream:#fff8e8;--paper:#fffefa;
+ --gold:#ffd66b;--line:#efdfb9;--muted:#7c6b55;--soft:#fff0c9;
+}
+.tp-music-toggle{
+ position:fixed;right:20px;bottom:20px;z-index:2000;
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ min-height:46px;padding:11px 17px;border:1px solid #d8a448;border-radius:999px;
+ background:rgba(255,249,234,.96);color:#684a27;
+ box-shadow:0 8px 24px rgba(126,87,34,.18);
+ font:700 14px/1.2 "Trebuchet MS",system-ui,sans-serif;cursor:pointer;
+ backdrop-filter:blur(10px);transition:transform .18s ease,background .18s ease;
+}
+.tp-music-toggle:hover{transform:translateY(-2px);background:#fff0c9}
+.tp-music-toggle[aria-pressed="true"]{background:#ffe39a}
+.tp-sitebar,.tp-pagebar{background:rgba(255,249,234,.97)!important}
+.tp-sitebar-brand,.tp-sitebar-link{color:#765027!important}
+.tp-sitebar-link{border-color:#e4c77f!important}
+.preview .task-label,.preview .tag{background:#f4d98c!important;color:#6b4c27!important}
+.preview .clue{color:#684a27!important}
+.generator .hero,.hero:has(.brand){background:linear-gradient(120deg,#dff3ff,#fff0c9)!important;color:#5c452b!important}
+.generator .hero h1,.hero:has(.brand) h1{color:#684a27!important}
+@media(max-width:760px){.tp-music-toggle{right:12px;bottom:88px;max-width:calc(100vw - 24px);font-size:13px}}
+@media(prefers-reduced-motion:reduce){.tp-music-toggle{transition:none}}
