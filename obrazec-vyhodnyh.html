@@ -30,8 +30,18 @@ a{color:var(--tp-green-dark)}
 #smp .smp-tag,#ob .ob-tag{background:#edf2e5!important;color:var(--tp-green-dark)!important;border:1px solid var(--tp-line)!important}
 #ob table{border-color:var(--tp-line)!important}#ob th{background:#edf2e5!important;color:var(--tp-ink)!important}
 @media(max-width:640px){#skz .skz-card,#bd .bd-card,#wk .wk-card,#smp .smp-book,#ob .ob-card{border-radius:18px!important}#skz .skz-body,#bd .bd-body,#wk .wk-body,#smp .smp-body{padding:18px!important}}
-</style></head>
+</style><style id="tp-page-navigation">
+.tp-pagebar{position:sticky;top:0;z-index:1000;background:rgba(251,248,239,.97);backdrop-filter:blur(12px);border-bottom:1px solid #dce5d7}
+.tp-pagebar-inner{width:min(1160px,calc(100% - 28px));min-height:58px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tp-pagebar-brand{display:inline-flex;align-items:center;gap:9px;color:#244b37;text-decoration:none;font:700 19px Georgia,"Times New Roman",serif}
+.tp-pagebar-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:11px;background:#edf2e6;color:#315f43;font:700 18px system-ui}
+.tp-pagebar-home{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 16px;border:1px solid #c69d43;border-radius:999px;background:#e8c978;color:#244b37;text-decoration:none;font:800 14px/1.2 "Trebuchet MS","Segoe UI",system-ui,sans-serif}
+.tp-pagebar-home:hover{background:#f1d995}
+@media(max-width:480px){.tp-pagebar-inner{min-height:54px}.tp-pagebar-brand{font-size:17px}.tp-pagebar-home{min-height:38px;padding:7px 12px;font-size:13px}}
+</style>
+</head>
 <body>
+<div class="tp-pagebar"><div class="tp-pagebar-inner"><a class="tp-pagebar-brand" href="index.html"><span class="tp-pagebar-mark" aria-hidden="true">✦</span>Тропинка</a><a class="tp-pagebar-home" href="index.html">← На главную</a></div></div>
 <!--
   ===== Образец набора «Выходные без экрана» =====
   Вставьте блок целиком (от <section id="ob"> до </section>) на страницу сайта или откройте файл отдельно.
