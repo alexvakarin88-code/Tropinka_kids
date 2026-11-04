@@ -193,6 +193,7 @@
     "description":"Персональные сказки, детские квесты, комплекты для праздников и идеи семейных выходных."
   }
   </script>
+  <link rel="stylesheet" href="assets/tropinka-sunny.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -223,6 +224,7 @@
     <section class="hero" id="top">
       <div class="container">
         <div class="hero-panel">
+          <span class="sunny-cloud cloud-a" aria-hidden="true"></span><span class="sunny-cloud cloud-b" aria-hidden="true"></span>
           <div class="hero-copy">
             <p class="eyebrow">Семейные истории и приключения</p>
             <h1>Пусть у детства будет больше историй</h1>
@@ -235,7 +237,7 @@
           </div>
           <div class="hero-art" aria-hidden="true">
             <span class="hero-spark"></span>
-            <img src="images/tropinka-hero.jpg" alt="">
+            <img src="images/sunny-hero.svg" alt="">
           </div>
         </div>
       </div>
@@ -277,7 +279,7 @@
         </div>
         <div class="products-grid">
           <article class="product-card">
-            <div class="product-image"><img src="images/tale.jpg" alt="Иллюстрация персональной сказки для ребёнка" loading="lazy"></div>
+            <div class="product-image"><img src="images/product-story.svg" alt="Открытая сказочная книга, замок и волшебная звезда" loading="lazy"></div>
             <div class="product-content">
               <div class="product-top"><span class="product-category">История о вашем ребёнке</span><span class="product-price">Пилот: бесплатно</span></div>
               <h3>Персональная сказка</h3>
@@ -296,7 +298,7 @@
           </article>
 
           <article class="product-card">
-            <div class="product-image"><img src="images/birthday.jpg" alt="Иллюстрация детского дня рождения" loading="lazy"></div>
+            <div class="product-image"><img src="images/product-birthday.svg" alt="Праздничный торт, свечи и воздушные шары" loading="lazy"></div>
             <div class="product-content">
               <div class="product-top"><span class="product-category">Праздник без суеты</span><span class="product-price">Пилот: бесплатно</span></div>
               <h3>День рождения под ключ</h3>
@@ -315,7 +317,7 @@
           </article>
 
           <article class="product-card">
-            <div class="product-image"><img src="images/quest.jpg" alt="Иллюстрация детского приключенческого квеста" loading="lazy"></div>
+            <div class="product-image"><img src="images/product-quest.svg" alt="Карта приключения, компас и сундук с сокровищами" loading="lazy"></div>
             <div class="product-content">
               <div class="product-top"><span class="product-category">Приключение на вашей территории</span><span class="product-price">От 490 ₽</span></div>
               <h3>Детский квест</h3>
@@ -334,7 +336,7 @@
           </article>
 
           <article class="product-card">
-            <div class="product-image"><img src="images/weekend.jpg" alt="Иллюстрация семейного отдыха на природе" loading="lazy"></div>
+            <div class="product-image"><img src="images/product-weekend.svg" alt="Семейный пикник, воздушный змей и солнечный день" loading="lazy"></div>
             <div class="product-content">
               <div class="product-top"><span class="product-category">Время вместе</span><span class="product-price">Пилот: бесплатно</span></div>
               <h3>Выходные без экрана</h3>
@@ -365,25 +367,25 @@
         </div>
         <div class="sample-grid">
           <article class="sample-card">
-            <span class="sample-icon" aria-hidden="true">📖</span>
+            <div class="sample-preview"><img src="images/preview-story.svg" alt="Превью разворота персональной сказки" loading="lazy"></div>
             <h3>Персональная сказка</h3>
             <p>Фрагмент истории, в которой ребёнок становится главным героем.</p>
             <a class="text-link" href="obrazec-skazki.html">Читать образец <span aria-hidden="true">→</span></a>
           </article>
           <article class="sample-card">
-            <span class="sample-icon" aria-hidden="true">🎂</span>
+            <div class="sample-preview"><img src="images/preview-birthday.svg" alt="Превью приглашения и плана детского праздника" loading="lazy"></div>
             <h3>День рождения</h3>
             <p>План подготовки, идеи праздника и задания для маленьких гостей.</p>
             <a class="text-link" href="obrazec-dnya-rozhdeniya.html">Открыть образец <span aria-hidden="true">→</span></a>
           </article>
           <article class="sample-card">
-            <span class="sample-icon" aria-hidden="true">🗺️</span>
+            <div class="sample-preview"><img src="images/preview-quest.svg" alt="Три карточки квеста: карта, шифр и финальная подсказка" loading="lazy"></div>
             <h3>Детский квест</h3>
             <p>Пример карточки задания с загадкой, подсказкой и переходом к следующей точке.</p>
             <a class="text-link" href="obrazec-kvesta.html">Посмотреть образец <span aria-hidden="true">→</span></a>
           </article>
           <article class="sample-card">
-            <span class="sample-icon" aria-hidden="true">🧭</span>
+            <div class="sample-preview"><img src="images/preview-weekend.svg" alt="Карточки семейных занятий на выходные" loading="lazy"></div>
             <h3>Семейные выходные</h3>
             <p>Примеры занятий, которые можно провести дома или на улице.</p>
             <a class="text-link" href="obrazec-vyhodnyh.html">Открыть образец <span aria-hidden="true">→</span></a>
@@ -456,7 +458,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div><strong style="color:#315f43">Тропинка</strong><div class="footer-small">Сказки · Квесты · Праздники · Семейные выходные</div></div>
+      <div><strong style="color:#765027">Тропинка</strong><div class="footer-small">Сказки · Квесты · Праздники · Семейные выходные</div></div>
       <nav class="footer-links" aria-label="Дополнительная навигация">
         <a href="privacy.html">Политика конфиденциальности</a>
         <a href="#products">Продукты</a>
@@ -471,5 +473,6 @@
       if(year){year.textContent=String(new Date().getFullYear());}
     })();
   </script>
+  <script src="assets/tropinka-ambience.js"></script>
 </body>
 </html>
