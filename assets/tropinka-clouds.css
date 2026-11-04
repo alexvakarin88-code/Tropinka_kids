@@ -1,0 +1,27 @@
+/* Minimal animated clouds retained over the original Tropinka design. */
+.tp-cloud-scene{isolation:isolate}
+.tp-cloud{
+  position:absolute;z-index:1;display:block;pointer-events:none;
+  width:190px;height:62px;border-radius:999px;opacity:.48;
+  background:
+    radial-gradient(ellipse 27% 42% at 25% 65%,rgba(255,255,255,.92) 98%,transparent 100%),
+    radial-gradient(ellipse 32% 56% at 48% 43%,rgba(255,255,255,.92) 98%,transparent 100%),
+    radial-gradient(ellipse 25% 43% at 72% 65%,rgba(255,255,255,.92) 98%,transparent 100%);
+  filter:drop-shadow(0 5px 10px rgba(255,255,255,.08));
+  animation:tp-cloud-drift 38s ease-in-out infinite alternate;
+}
+.tp-cloud-one{top:30px;left:8%}
+.tp-cloud-two{right:12%;bottom:42px;width:145px;height:48px;opacity:.32;animation-duration:51s;animation-direction:alternate-reverse}
+.hero-copy{position:relative;z-index:2}
+.hero-art{z-index:0}
+@keyframes tp-cloud-drift{
+  from{transform:translate3d(-14px,0,0)}
+  to{transform:translate3d(34px,9px,0)}
+}
+@media(max-width:760px){
+  .tp-cloud-one{top:18px;left:5%;transform:scale(.76);transform-origin:left top}
+  .tp-cloud-two{right:4%;bottom:20px;transform:scale(.68);transform-origin:right bottom}
+}
+@media(prefers-reduced-motion:reduce){
+  .tp-cloud{animation:none}
+}
