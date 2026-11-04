@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#244b37">
+<meta name="description" content="Пример карточки задания для детского квеста от проекта «Тропинка».">
+<link rel="canonical" href="https://tropinka-kids.ru/obrazec-kvesta.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Образец детского квеста | Тропинка</title>
+<style>
+:root{--forest:#244b37;--forest2:#315f43;--leaf:#477b50;--gold:#e8c978;--gold-dark:#c69d43;--cream:#fbf8ef;--paper:#fffefa;--mist:#edf2e6;--ink:#24372c;--muted:#627267;--line:#dce5d7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 "Trebuchet MS","Segoe UI",system-ui,sans-serif}
+.tp-pagebar{position:sticky;top:0;z-index:1000;background:rgba(251,248,239,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.tp-pagebar-inner{width:min(1160px,calc(100% - 28px));min-height:58px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tp-pagebar-brand{display:inline-flex;align-items:center;gap:9px;color:var(--forest);text-decoration:none;font:700 19px Georgia,"Times New Roman",serif}
+.tp-pagebar-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:11px;background:var(--mist);color:var(--forest2);font:700 18px system-ui}
+.tp-pagebar-home,.button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 18px;border:1px solid var(--gold-dark);border-radius:999px;background:var(--gold);color:var(--forest);text-decoration:none;font-weight:800}
+.tp-pagebar-home:hover,.button:hover{background:#f1d995}
+.container{width:min(820px,calc(100% - 32px));margin:0 auto}
+main{padding:38px 0 70px}
+.kicker{margin:0 0 10px;color:var(--leaf);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.18;color:var(--forest)}
+h1{font-size:clamp(34px,6vw,50px);margin:0}
+.lead{max-width:66ch;color:var(--muted);font-size:17px;margin:14px 0 28px}
+.preview{overflow:hidden;border:1px solid var(--line);border-radius:26px;background:var(--paper);box-shadow:0 16px 42px rgba(48,75,48,.10)}
+.preview-head{padding:23px 26px;background:linear-gradient(125deg,var(--forest),#66865c);color:white;border-bottom:3px solid var(--gold)}
+.preview-head .tag{display:inline-flex;padding:5px 12px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(255,255,255,.12);font-size:13px;font-weight:800}
+.preview-head h2{margin:13px 0 5px;color:white;font-size:clamp(25px,5vw,33px)}
+.preview-head p{margin:0;color:#edf4e9}
+.preview-body{padding:clamp(20px,4vw,30px)}
+.task-label{color:var(--leaf);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.task-title{margin:7px 0 10px;font-size:25px}
+.task-copy{margin:0;color:var(--muted);font-size:17px}
+.letter-row{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 22px}
+.letter-row span{width:42px;height:44px;display:grid;place-items:center;border:1px solid #cbd9c9;border-radius:11px;background:var(--mist);color:var(--forest);font-size:21px;font-weight:900}
+.clue{margin-top:20px;padding:18px 20px;border-left:4px solid var(--gold-dark);border-radius:0 15px 15px 0;background:#f7f4e8}
+.clue h3{margin:0 0 8px;font-size:19px}
+.clue p{margin:0;color:#43584a;font-size:17px}
+.organizer-note{margin:18px 0 0;padding:15px 17px;border:1px solid var(--line);border-radius:15px;background:var(--mist);color:#506354;font-size:14px}
+.after{margin-top:28px;padding:25px;border:1px solid var(--line);border-radius:22px;background:#fff;text-align:center}
+.after h2{margin:0;font-size:27px}
+.after p{max-width:58ch;margin:10px auto 18px;color:var(--muted)}
+.after-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.button.secondary{background:white;border-color:#cbd9c9}
+footer{padding:24px 0 34px;color:#718075;text-align:center;font-size:12px}
+@media(max-width:520px){.tp-pagebar-inner{min-height:54px}.tp-pagebar-brand{font-size:17px}.tp-pagebar-home{min-height:38px;padding:7px 12px;font-size:13px}.preview-head{padding:20px}.preview-body{padding:19px}.letter-row span{width:38px;height:40px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="tp-pagebar"><div class="tp-pagebar-inner"><a class="tp-pagebar-brand" href="index.html"><span class="tp-pagebar-mark" aria-hidden="true">✦</span>Тропинка</a><a class="tp-pagebar-home" href="index.html">← На главную</a></div></div>
+<main class="container">
+<p class="kicker">Пример готового материала</p>
+<h1>Как выглядит детский квест</h1>
+<p class="lead">Ниже — пример одной остановки из приключения. В готовом комплекте каждая карточка содержит задание, подсказку для взрослого и переход к следующей точке маршрута.</p>
+
+<article class="preview" aria-labelledby="preview-title">
+  <header class="preview-head">
+    <span class="tag">Остановка № 2 · Беседка</span>
+    <h2 id="preview-title">Секретное слово</h2>
+    <p>Разгадай шифр, чтобы узнать, куда отправиться дальше</p>
+  </header>
+  <div class="preview-body">
+    <p class="task-label">Задание для участников</p>
+    <h3 class="task-title">Прочитай справа налево</h3>
+    <p class="task-copy">Секретное слово записано наоборот. Переставь буквы в правильном порядке и назови ответ ведущему.</p>
+    <div class="letter-row" aria-label="Буквы: Е, Е, Н, Ь, Л, И, С">
+      <span>Е</span><span>Е</span><span>Н</span><span>Ь</span><span>Л</span><span>И</span><span>С</span>
+    </div>
+    <div class="clue">
+      <h3>Куда идти дальше?</h3>
+      <p>Тут деревья — великаны,<br>Шелестят над головой.<br>И тропинка между ними<br>Позовёт тебя с собой.</p>
+    </div>
+    <p class="organizer-note"><strong>Подсказка для взрослого:</strong> правильный ответ — «СИЛЬНЕЕ». Следующая точка маршрута — место с деревьями, которое взрослый заранее выбрал и проверил.</p>
+  </div>
+</article>
+
+<section class="after">
+  <h2>Хотите такой квест для своей семьи?</h2>
+  <p>Выберите тему, возраст участников и место проведения. Мы подготовим маршрут, задания и инструкцию для взрослого.</p>
+  <div class="after-actions">
+    <a class="button" href="https://alexvakarin88-code.github.io/questin/">Выбрать квест</a>
+    <a class="button secondary" href="index.html#products">Вернуться к продуктам</a>
+  </div>
+</section>
+</main>
+<footer class="container">«Тропинка» · Сказки · Квесты · Праздники · Семейные выходные</footer>
+</body>
+</html>
