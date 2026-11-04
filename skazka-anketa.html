@@ -474,6 +474,7 @@ a{color:var(--tp-green-dark)}
     // Если оставить пустым, включится запасной вариант: родитель копирует анкету и отправляет её в Telegram или на почту.
     submitUrl: "",
     telegram: "Alex_delo",          // ник в Telegram без @
+    max: "https://max.ru/u/f9LHodD0cOIHAlvhLJwrfuPTBusHcOWxSZyOVfwWYsinvA21DFJYPw5Mdzc", // личные сообщения в MAX
     email: "al-vakarin@yandex.ru",  // почта для запасного варианта
     privacyUrl: "privacy.html",                // ссылка на политику конфиденциальности
     maxPhotos: 3,
@@ -747,14 +748,15 @@ a{color:var(--tp-green-dark)}
     } else {
       var intro = mode === "failed"
         ? "Не получилось отправить анкету автоматически. Это не страшно: скопируйте текст ниже и отправьте нам."
-        : "Анкета готова. Осталось отправить её нам: скопируйте текст и отправьте в Telegram или на почту.";
+        : "Анкета готова. Осталось отправить её нам: скопируйте текст и отправьте в MAX, Telegram или на почту.";
       var mailBody = "Здравствуйте! Заполнил(а) анкету для сказки про " + (d.child_name || "ребёнка") + ". Полный текст анкеты ниже:\n\n";
       doneEl.innerHTML =
         '<h3 tabindex="-1">' + (mode === "failed" ? "Отправим вручную" : "Анкета готова") + "</h3>" +
         '<p class="skz-lead"></p>' +
         '<div class="skz-actions">' +
           '<button type="button" class="skz-btn" id="skz-copy">Скопировать анкету</button>' +
-          '<a class="skz-btn skz-btn-ghost" id="skz-tg" target="_blank" rel="noopener">Открыть Telegram</a>' +
+          '<a class="skz-btn skz-btn-ghost" id="skz-max" target="_blank" rel="noopener">Открыть MAX</a>
+          <a class="skz-btn skz-btn-ghost" id="skz-tg" target="_blank" rel="noopener">Открыть Telegram</a>' +
           '<a class="skz-btn skz-btn-ghost" id="skz-mail">Написать на почту</a>' +
         "</div>" +
         '<p class="skz-ok" id="skz-copied" aria-live="polite"></p>' +
@@ -763,6 +765,7 @@ a{color:var(--tp-green-dark)}
         '<textarea id="skz-summary" readonly></textarea>';
       doneEl.querySelector(".skz-lead").textContent = intro;
       doneEl.querySelector("#skz-summary").value = summary;
+      doneEl.querySelector("#skz-max").href = CONFIG.max;
       doneEl.querySelector("#skz-tg").href = "https://t.me/" + CONFIG.telegram;
       doneEl.querySelector("#skz-mail").href = "mailto:" + CONFIG.email +
         "?subject=" + encodeURIComponent("Анкета: сказка про " + (d.child_name || "ребёнка")) +
